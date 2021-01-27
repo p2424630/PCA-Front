@@ -1,3 +1,3 @@
 <template>
-  <h1>Oops, it looks like the page you're looking for doesn't exist.</h1>
+  <h3>The page you are looking for does not exist.</h3>
 </template>

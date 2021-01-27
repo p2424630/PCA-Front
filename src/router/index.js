@@ -1,22 +1,29 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Home from "@/views/Home.vue";
-import Calc from "@/views/Calc.vue";
+import Exercises from "@/views/Exercises.vue";
+import Calculator from "@/views/Calculator.vue";
 import NotFound from "@/views/NotFound.vue";
 
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: Home,
+    path: "/exercises",
+    name: "exercises",
+    component: Exercises,
   },
   {
-    path: "/calc",
-    name: "calc",
-    component: Calc,
+    path: "/",
+    name: "home",
+    redirect: "/exercises",
+  },
+  {
+    path: "/calculator",
+    name: "calculator",
+    component: Calculator,
   },
   {
     path: "/:catchAll(.*)",
+    name: "not_found",
     component: NotFound,
+    // redirect: "/",
   },
 ];
 

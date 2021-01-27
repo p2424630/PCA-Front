@@ -1,22 +1,25 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <span> - </span>
-      <router-link to="/Calc">Calculator</router-link>
-    </div>
-    <router-view />
+  <div class="nav">
+    <span> {{ title }} - </span>
+    <router-link to="/Exercises">Exercises</router-link>
+    <span> | </span>
+    <router-link to="/Calculator">Calculator</router-link>
   </div>
+  <router-view />
 </template>
 
 <script>
 export default {
   data() {
     return {
-      title: "Proposition App",
+      title: "PCA",
     };
   },
 };
 </script>
 
-<style></style>
+<style>
+.nav {
+  font-size: 1.5em;
+}
+</style>

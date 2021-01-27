@@ -1,5 +1,4 @@
 <template>
-  <h1>{{ title }}</h1>
   <form class="flex" @submit.prevent="formSubmitted()">
     <input
       v-model="searchProp"
@@ -74,6 +73,9 @@ body {
   width: 80%;
   margin: 2em auto 0 auto;
 }
+form {
+  margin: 1em auto 0 auto;
+}
 .resDataT {
   text-transform: capitalize;
   color: green;
@@ -86,14 +88,11 @@ body {
   display: flex;
 }
 table {
-  margin: 2em auto 0 auto;
+  margin: 1em auto 0 auto;
 }
 td,
 th {
   font-size: 0.8em;
   text-align: center;
-}
-img {
-  width: 20%;
 }
 </style>
