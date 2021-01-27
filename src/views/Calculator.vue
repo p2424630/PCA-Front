@@ -1,5 +1,5 @@
 <template>
-  <form class="flex" @submit.prevent="formSubmitted()">
+  <form class="flex" @submit.prevent="propSubmitted()">
     <input
       v-model="searchProp"
       class="u-full-width"
@@ -56,9 +56,9 @@ export default {
     };
   },
   methods: {
-    formSubmitted() {
+    propSubmitted() {
       this.loading = true;
-      this.results = [];
+      // this.results = [];
       API.calcProp(this.searchProp).then((results) => {
         this.results = results;
         this.loading = false;
@@ -71,10 +71,10 @@ export default {
 <style>
 body {
   width: 80%;
-  margin: 2em auto 0 auto;
+  margin: 2em auto 1em auto;
 }
 form {
-  margin: 1em auto 0 auto;
+  margin: 1em auto auto auto;
 }
 .resDataT {
   text-transform: capitalize;
@@ -86,9 +86,6 @@ form {
 }
 .flex {
   display: flex;
-}
-table {
-  margin: 1em auto 0 auto;
 }
 td,
 th {
