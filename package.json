@@ -1,6 +1,6 @@
 {
   "name": "pca-front",
-  "version": "0.1.2",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
