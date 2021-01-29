@@ -3,9 +3,9 @@
     <input
       v-model="searchProp"
       class="u-full-width"
-      type="text"
-      id="searchProp"
       name="searchProp"
+      id="searchProp"
+      type="text"
       placeholder="Enter Proposition"
     />
     <button type="submit">CALCULATE</button>
@@ -26,15 +26,15 @@
   <table class="u-full-width">
     <thead>
       <tr>
-        <th v-for="Variab in results.Variables" :key="Variab">{{ Variab }}</th>
+        <th v-for="variable in results.Variables" :key="variable">{{ variable }}</th>
         <th>{{ results.Proposition }}</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="(e, i) in results.Interpretations" :key="i">
+      <tr v-for="(interpretation, row) in results.Interpretations" :key="row">
         <td
-          v-for="(bool, k) in e"
-          :key="k"
+          v-for="(bool, i) in interpretation"
+          :key="i"
           :class="{ resDataT: bool === true, resDataF: bool === false }"
         >
           {{ bool }}
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import API from "../API";
+import API from "@/API";
 export default {
   data() {
     return {
@@ -58,7 +58,7 @@ export default {
   methods: {
     propSubmitted() {
       this.loading = true;
-      // this.results = [];
+      this.results = [];
       API.calcProp(this.searchProp).then((results) => {
         this.results = results;
         this.loading = false;
@@ -70,7 +70,7 @@ export default {
 
 <style>
 body {
-  width: 80%;
+  width: 90%;
   margin: 2em auto 1em auto;
 }
 form {

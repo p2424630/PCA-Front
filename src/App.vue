@@ -1,6 +1,6 @@
 <template>
   <div class="nav">
-    <span> {{ title }}- </span>
+    <!-- <span> {{ title }}- </span> -->
     <router-link to="/Exercises">Exercises</router-link>
     <span> | </span>
     <router-link to="/Calculator">Calculator</router-link>

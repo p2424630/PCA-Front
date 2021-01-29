@@ -5,14 +5,14 @@ import NotFound from "@/views/NotFound.vue";
 
 const routes = [
   {
+    path: "/",
+    name: "home",
+    redirect: "/exercises"
+  },
+  {
     path: "/exercises",
     name: "exercises",
     component: Exercises,
-  },
-  {
-    path: "/",
-    name: "home",
-    redirect: "/exercises",
   },
   {
     path: "/calculator",
