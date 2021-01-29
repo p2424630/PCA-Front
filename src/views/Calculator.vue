@@ -51,17 +51,17 @@ export default {
     return {
       title: "Calculator",
       searchProp: "",
-      results: [],
       loading: false,
+      results: [],
     };
   },
   methods: {
     propSubmitted() {
-      this.loading = true;
       this.results = [];
+      this.loading = true;
       API.calcProp(this.searchProp).then((results) => {
-        this.results = results;
         this.loading = false;
+        this.results = results;
       });
     },
   },
