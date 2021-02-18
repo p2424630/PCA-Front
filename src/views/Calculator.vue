@@ -23,7 +23,7 @@
       </span>
     </div>
   </section>
-  <table class="u-full-width">
+  <table class="u-full-width" :hidden="!showTable">
     <thead>
       <tr>
         <th v-for="variable in results.Variables" :key="variable">{{ variable }}</th>
@@ -52,15 +52,17 @@ export default {
       title: "Calculator",
       searchProp: "",
       loading: false,
+      showTable: false,
       results: [],
     };
   },
   methods: {
     propSubmitted() {
-      this.results = [];
       this.loading = true;
-      API.calcProp(this.searchProp).then((results) => {
+      this.results = [];
+      API.calcProp(this.searchProp, "test").then((results) => {
         this.loading = false;
+        this.showTable = true;
         this.results = results;
       });
     },
@@ -69,12 +71,8 @@ export default {
 </script>
 
 <style>
-body {
-  width: 90%;
-  margin: 2em auto 1em auto;
-}
 form {
-  margin: 1em auto auto auto;
+  margin: auto;
 }
 .resDataT {
   text-transform: capitalize;
@@ -89,7 +87,7 @@ form {
 }
 td,
 th {
-  font-size: 0.8em;
+  font-size: 12px;
   text-align: center;
 }
 </style>

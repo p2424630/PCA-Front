@@ -1,24 +1,45 @@
 const API_URL = 'http://localhost:8085/api';
 
 export default {
-  calcProp(searchProp) {
+  // async calcProp(searchProp, params) {
+  //   const urlParams = new URLSearchParams(params);
+  //   const url = `${API_URL}/calc/${searchProp}?${urlParams}`;
+  //   const response = await fetch(url, {
+  //     headers: {
+  //       accept: 'application/json',
+  //     },
+  //   });
+  //   const data = await response.json();
+  //   if (response.ok) {
+  //         return data;
+  //       }
+  //   const error = new Error(data.message || 'Failed to get Prop');
+  //   error.response = data;
+  //   return error;
+  // },
+  async calcProp(searchProp) {
     const url = `${API_URL}/calc/${searchProp}`;
-    return fetch(url).then(response => response.json());
+    const response = await fetch(url);
+    return response.json();
   },
-  calcPropSat(searchProp) {
+  async calcPropSat(searchProp) {
     const url = `${API_URL}/sat/${searchProp}`;
-    return fetch(url).then(response => response.json());
+    const response = await fetch(url);
+    return response.json();
   },
-  calcPropTaut(searchProp) {
+  async calcPropTaut(searchProp) {
     const url = `${API_URL}/taut/${searchProp}`;
-    return fetch(url).then(response => response.json());
+    const response = await fetch(url);
+    return response.json();
   },
-  calcPropContr(searchProp) {
+  async calcPropContr(searchProp) {
     const url = `${API_URL}/contr/${searchProp}`;
-    return fetch(url).then(response => response.json());
+    const response = await fetch(url);
+    return response.json();
   },
-  calcPropInterp(searchProp) {
+  async calcPropInterp(searchProp) {
     const url = `${API_URL}/interp/${searchProp}`;
-    return fetch(url).then(response => response.json());
+    const response = await fetch(url);
+    return response.json();
   },
 };
