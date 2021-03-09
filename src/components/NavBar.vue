@@ -1,5 +1,5 @@
 <template>
-  <nav>
+  <nav class="nav-bar">
     <router-link class="routerLink" to="/">{{ title }}</router-link>
     <router-link class="routerLink" to="/Exercises">Exercises</router-link>
     <router-link class="routerLink" to="/Calculator">Calculator</router-link>
@@ -8,7 +8,9 @@
 
 <script>
 export default {
-  props: ["title"],
+  props: {
+    title: String,
+  },
 };
 </script>
 

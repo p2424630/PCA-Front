@@ -1,49 +1,53 @@
 <template>
-  <form class="flex" @submit.prevent="propSubmitted()">
-    <input
-      v-model="searchProp"
-      class="u-full-width"
-      name="searchProp"
-      id="searchProp"
-      type="text"
-      placeholder="Enter Proposition"
-    />
-    <button type="submit">CALCULATE</button>
-  </form>
-  <strong v-if="loading">Loading...</strong>
-  <section class="u-full-width">
-    <div v-for="(resData, resName) in results" :key="resName">
-      <span
-        v-if="resName !== 'Interpretations' && resName !== 'Variables' && resName !== 'Proposition'"
-      >
-        <strong>{{ resName }}: </strong>
-        <span :class="{ resDataT: resData === true, resDataF: resData === false }"
-          >{{ resData }}
-        </span>
-      </span>
-    </div>
-  </section>
-  <table class="u-full-width" v-if="showTable">
-    <thead>
-      <tr>
-        <th>#</th>
-        <th v-for="variable in results.Variables" :key="variable">{{ variable }}</th>
-        <th>{{ results.Proposition }}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(interpretation, row) in results.Interpretations" :key="row">
-        <td>{{ row + 1 }}</td>
-        <td
-          v-for="(bool, i) in interpretation"
-          :key="i"
-          :class="{ resDataT: bool === true, resDataF: bool === false }"
+  <div class="calculator-view">
+    <form class="flex" @submit.prevent="propSubmitted()">
+      <input
+        v-model="searchProp"
+        class="u-full-width"
+        name="searchProp"
+        id="searchProp"
+        type="text"
+        placeholder="Enter Proposition"
+      />
+      <button type="submit">calculate</button>
+    </form>
+    <strong v-if="loading">Loading...</strong>
+    <section v-if="!loading" class="u-full-width">
+      <div v-for="(resData, resName) in results" :key="resName">
+        <span
+          v-if="
+            resName !== 'Interpretations' && resName !== 'Variables' && resName !== 'Proposition'
+          "
         >
-          {{ bool }}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+          <strong>{{ resName }}: </strong>
+          <span :class="{ resDataT: resData === true, resDataF: resData === false }"
+            >{{ resData }}
+          </span>
+        </span>
+      </div>
+    </section>
+    <table v-if="showTable" class="u-full-width">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th v-for="variable in results.Variables" :key="variable">{{ variable }}</th>
+          <th>{{ results.Proposition }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="(interpretation, row) in results.Interpretations" :key="row">
+          <td>{{ row + 1 }}</td>
+          <td
+            v-for="(bool, i) in interpretation"
+            :key="i"
+            :class="{ resDataT: bool === true, resDataF: bool === false }"
+          >
+            {{ bool }}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -77,7 +81,11 @@ export default {
 
 <style>
 form {
-  margin: auto;
+  margin: 0;
+}
+.calculator-view {
+  margin: 2em auto 2em auto;
+  width: 85%;
 }
 .resDataT {
   text-transform: capitalize;

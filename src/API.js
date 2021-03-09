@@ -1,22 +1,19 @@
-const API_URL = 'http://localhost:8085/api';
+const API_URL = "http://localhost:8085/api";
 
 export default {
-  // async calcProp(searchProp, params) {
-  //   const urlParams = new URLSearchParams(params);
-  //   const url = `${API_URL}/calc/${searchProp}?${urlParams}`;
   async calcProp(searchProp) {
     const url = `${API_URL}/calc/${searchProp}`;
     const response = await fetch(url, {
       headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
     });
     const data = await response.json();
     if (response.ok) {
-          return data;
-        }
-    const error = new Error(data.message || 'Failed to get Prop');
+      return data;
+    }
+    const error = new Error(data.message || "Failed to get Prop");
     error.response = data;
     return error;
   },
@@ -24,31 +21,47 @@ export default {
     const url = `${API_URL}/exercises`;
     const response = await fetch(url, {
       headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
     });
     const data = await response.json();
     if (response.ok) {
-          return data;
-        }
-    const error = new Error(data.message || 'Failed to get Exercise Sections');
+      return data;
+    }
+    const error = new Error(data.message || "Failed to get Exercise Sections");
     error.response = data;
     return error;
   },
-  async excercise(excerciseId) {
-    const url = `${API_URL}/exercises/${excerciseId}`;
+  async exercises(section) {
+    const url = `${API_URL}/exercises/${section}`;
     const response = await fetch(url, {
       headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
+        "Content-Type": "application/json",
+        Accept: "application/json",
       },
     });
     const data = await response.json();
     if (response.ok) {
-          return data;
-        }
-    const error = new Error(data.message || 'Failed to get Exercise Sections');
+      return data;
+    }
+    const error = new Error(data.message || "Failed to get Exercises for this Section");
+    error.response = data;
+    return error;
+  },
+  async calcExercise(q_prop, method, t_prop) {
+    const url = `${API_URL}/exercises/eval/${q_prop}?method=${method}&t_prop=${t_prop}`;
+    const response = await fetch(url, {
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+    const data = await response.json();
+    if (response.ok) {
+      return data;
+    }
+    const error = new Error(data.message || "Failed to get Prop");
     error.response = data;
     return error;
   },
