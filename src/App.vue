@@ -1,60 +1,32 @@
 <template>
-  <nav>
-    <router-link class="routerLink" to="/">{{ title }}</router-link>
-    <router-link class="routerLink" to="/Exercises">Exercises</router-link>
-    <router-link class="routerLink" to="/Calculator">Calculator</router-link>
-  </nav>
-
+  <!-- <div id="app"> -->
+  <NavBar v-bind:title="title" />
   <div class="routerBody">
     <router-view />
   </div>
+  <!-- </div> -->
 </template>
 
 <script>
-// import Highlight from "@/components/Highlight.vue";
-
+import NavBar from "@/components/NavBar.vue";
 export default {
   data() {
     return {
       title: "PCA",
     };
   },
+  components: {
+    NavBar,
+  },
 };
 </script>
 
 <style>
-@media (min-width: 768px) {
-}
-
 body {
   margin: 0;
 }
-
 .routerBody {
-  width: 80%;
+  width: 85%;
   margin: 2em auto 1em auto;
-}
-
-nav :first-child {
-  margin-right: auto;
-  font-weight: bold;
-}
-
-nav {
-  display: flex;
-  font-size: 1.5em;
-  background-color: rgba(0, 0, 15, 0.8);
-}
-
-nav .routerLink:hover {
-  color: silver;
-  transition: 0.5s;
-}
-
-nav .routerLink {
-  text-decoration: none;
-  color: white;
-  padding: 0.25em 1em;
-  display: inline-block;
 }
 </style>

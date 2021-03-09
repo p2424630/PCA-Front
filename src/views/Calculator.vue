@@ -23,15 +23,17 @@
       </span>
     </div>
   </section>
-  <table class="u-full-width" :hidden="!showTable">
+  <table class="u-full-width" v-if="showTable">
     <thead>
       <tr>
+        <th>#</th>
         <th v-for="variable in results.Variables" :key="variable">{{ variable }}</th>
         <th>{{ results.Proposition }}</th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="(interpretation, row) in results.Interpretations" :key="row">
+        <td>{{ row + 1 }}</td>
         <td
           v-for="(bool, i) in interpretation"
           :key="i"
@@ -59,11 +61,14 @@ export default {
   methods: {
     propSubmitted() {
       this.loading = true;
+      this.showTable = false;
       this.results = [];
       API.calcProp(this.searchProp, "test").then((results) => {
         this.loading = false;
-        this.showTable = true;
         this.results = results;
+        if (!(results instanceof Error)) {
+          this.showTable = true;
+        }
       });
     },
   },

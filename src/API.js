@@ -4,23 +4,53 @@ export default {
   // async calcProp(searchProp, params) {
   //   const urlParams = new URLSearchParams(params);
   //   const url = `${API_URL}/calc/${searchProp}?${urlParams}`;
-  //   const response = await fetch(url, {
-  //     headers: {
-  //       accept: 'application/json',
-  //     },
-  //   });
-  //   const data = await response.json();
-  //   if (response.ok) {
-  //         return data;
-  //       }
-  //   const error = new Error(data.message || 'Failed to get Prop');
-  //   error.response = data;
-  //   return error;
-  // },
   async calcProp(searchProp) {
     const url = `${API_URL}/calc/${searchProp}`;
-    const response = await fetch(url);
-    return response.json();
+    const response = await fetch(url, {
+      headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+      },
+    });
+    const data = await response.json();
+    if (response.ok) {
+          return data;
+        }
+    const error = new Error(data.message || 'Failed to get Prop');
+    error.response = data;
+    return error;
+  },
+  async sections() {
+    const url = `${API_URL}/exercises`;
+    const response = await fetch(url, {
+      headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+      },
+    });
+    const data = await response.json();
+    if (response.ok) {
+          return data;
+        }
+    const error = new Error(data.message || 'Failed to get Exercise Sections');
+    error.response = data;
+    return error;
+  },
+  async excercise(excerciseId) {
+    const url = `${API_URL}/exercises/${excerciseId}`;
+    const response = await fetch(url, {
+      headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+      },
+    });
+    const data = await response.json();
+    if (response.ok) {
+          return data;
+        }
+    const error = new Error(data.message || 'Failed to get Exercise Sections');
+    error.response = data;
+    return error;
   },
   async calcPropSat(searchProp) {
     const url = `${API_URL}/sat/${searchProp}`;
