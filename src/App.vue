@@ -31,4 +31,7 @@ body {
   text-transform: capitalize;
   color: red;
 }
+.errorFetching {
+  color: red;
+}
 </style>

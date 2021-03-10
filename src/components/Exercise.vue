@@ -10,8 +10,11 @@
         placeholder="Enter Proposition"
       />
       <button type="submit">check</button>
+      <p class="errorFetching" v-if="errorFetching">
+        {{ results.response.Error }}
+      </p>
       <p
-        v-if="!loading"
+        v-if="!loading && !errorFetching"
         :class="{ resDataT: results.Result === true, resDataF: results.Result === false }"
       >
         {{ results.Result_Prop }}
@@ -38,15 +41,20 @@ export default {
       searchProp: "",
       results: [],
       loading: false,
+      errorFetching: false,
     };
   },
   methods: {
     checkProp() {
       this.results = [];
       this.loading = true;
+      this.errorFetching = false;
       API.calcExercise(this.curExercise, this.eval_methods, this.searchProp).then((results) => {
         this.results = results;
         this.loading = false;
+        if (results instanceof Error) {
+          this.errorFetching = true;
+        }
       });
     },
   },

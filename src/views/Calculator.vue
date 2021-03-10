@@ -12,7 +12,10 @@
       <button type="submit">calculate</button>
     </form>
     <strong v-if="loading">Loading...</strong>
-    <section v-if="!loading" class="u-full-width">
+    <p class="errorFetching" v-if="errorFetching">
+      {{ results.response.Error }}
+    </p>
+    <section v-if="!loading && !errorFetching" class="u-full-width">
       <div v-for="(resData, resName) in results" :key="resName">
         <span
           v-if="
@@ -26,7 +29,7 @@
         </span>
       </div>
     </section>
-    <table v-if="showTable" class="u-full-width">
+    <table v-if="!errorFetching && showTable" class="u-full-width">
       <thead>
         <tr>
           <th>#</th>
@@ -58,6 +61,7 @@ export default {
       title: "Calculator",
       searchProp: "",
       loading: false,
+      errorFetching: false,
       showTable: false,
       results: [],
     };
@@ -65,13 +69,14 @@ export default {
   methods: {
     propSubmitted() {
       this.loading = true;
-      this.showTable = false;
-      this.results = [];
+      this.errorFetching = false;
+      (this.showTable = false), (this.results = []);
       API.calcProp(this.searchProp, "test").then((results) => {
         this.loading = false;
         this.results = results;
-        if (!(results instanceof Error)) {
-          this.showTable = true;
+        this.showTable = true;
+        if (results instanceof Error) {
+          this.errorFetching = true;
         }
       });
     },
