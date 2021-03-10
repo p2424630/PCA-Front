@@ -14,7 +14,7 @@
         v-if="!loading"
         :class="{ resDataT: results.Result === true, resDataF: results.Result === false }"
       >
-        {{ results.Proposition }}
+        {{ results.Result_Prop }}
       </p>
     </form>
   </div>
@@ -24,8 +24,14 @@
 import API from "@/API";
 export default {
   props: {
-    curExercise: String,
-    eval_method: String,
+    curExercise: {
+      type: String,
+      required: true,
+    },
+    eval_methods: {
+      type: Array,
+      required: true,
+    },
   },
   data() {
     return {
@@ -38,7 +44,7 @@ export default {
     checkProp() {
       this.results = [];
       this.loading = true;
-      API.calcExercise(this.curExercise, this.eval_method, this.searchProp).then((results) => {
+      API.calcExercise(this.curExercise, this.eval_methods, this.searchProp).then((results) => {
         this.results = results;
         this.loading = false;
       });

@@ -80,26 +80,18 @@ export default {
 </script>
 
 <style>
-form {
-  margin: 0;
-}
 .calculator-view {
   margin: 2em auto 2em auto;
   width: 85%;
 }
-.resDataT {
-  text-transform: capitalize;
-  color: green;
+.calculator-view form {
+  margin: 0;
 }
-.resDataF {
-  text-transform: capitalize;
-  color: red;
-}
-.flex {
+.calculator-view .flex {
   display: flex;
 }
-td,
-th {
+.calculator-view td,
+.calculator-view th {
   font-size: 12px;
   text-align: center;
 }

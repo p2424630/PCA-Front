@@ -49,8 +49,8 @@ export default {
     error.response = data;
     return error;
   },
-  async calcExercise(q_prop, method, t_prop) {
-    const url = `${API_URL}/exercises/eval/${q_prop}?method=${method}&t_prop=${t_prop}`;
+  async calcExercise(q_prop, methods, t_prop) {
+    const url = `${API_URL}/exercises/eval/${q_prop}?methods=${methods}&t_prop=${t_prop}`;
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",

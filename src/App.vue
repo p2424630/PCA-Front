@@ -23,4 +23,12 @@ export default {
 body {
   margin: 0;
 }
+.resDataT {
+  text-transform: capitalize;
+  color: green;
+}
+.resDataF {
+  text-transform: capitalize;
+  color: red;
+}
 </style>
