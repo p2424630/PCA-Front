@@ -1,18 +1,13 @@
 <template>
   <div class="cur-exercise">
-    <form @submit.prevent="checkProp()">
+    <form @submit.prevent="checkInput()">
       {{ curExercise }}
-      <input
-        v-model="searchProp"
-        name="searchProp"
-        id="searchProp"
-        type="text"
-        placeholder="Enter Proposition"
-      />
+      <input v-model="tProp" name="tProp" id="tProp" type="text" placeholder="Enter Proposition" />
       <button type="submit">check</button>
       <p class="errorFetching" v-if="errorFetching">
         {{ results.response.Error }}
       </p>
+      <strong v-if="loading"> Loading...</strong>
       <p
         v-if="!loading && !errorFetching"
         :class="{ resDataT: results.Result === true, resDataF: results.Result === false }"
@@ -38,18 +33,18 @@ export default {
   },
   data() {
     return {
-      searchProp: "",
+      tProp: "",
       results: [],
       loading: false,
       errorFetching: false,
     };
   },
   methods: {
-    checkProp() {
+    checkInput() {
       this.results = [];
       this.loading = true;
       this.errorFetching = false;
-      API.calcExercise(this.curExercise, this.eval_methods, this.searchProp).then((results) => {
+      API.calcExercise(this.curExercise, this.eval_methods, this.tProp).then((results) => {
         this.results = results;
         this.loading = false;
         if (results instanceof Error) {

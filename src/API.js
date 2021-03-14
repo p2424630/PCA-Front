@@ -61,7 +61,7 @@ export default {
     if (response.ok) {
       return data;
     }
-    const error = new Error(data.message || "Failed to get Prop");
+    const error = new Error(data.message || "Failed to get Response for exercise");
     error.response = data;
     return error;
   },

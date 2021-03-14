@@ -5,10 +5,14 @@
     </div>
     <strong v-if="loading">Loading...</strong>
     <div v-if="!loading && !initial">
-      <div class="curExercises" v-for="(curExercises, id) in sectionsEx.Exercises" :key="id">
-        {{ curExercises.question }}
-        <div class="curExercise" v-for="(curExercise, id) in curExercises.props" :key="id">
-          <Exercise :curExercise="curExercise" :eval_methods="curExercises.eval_methods" />
+      <div
+        class="curExercises"
+        v-for="(curExercises, sectionId) in sectionsEx.Exercises"
+        :key="sectionId"
+      >
+        {{ sectionId + 1 }}) {{ curExercises.question }}
+        <div v-for="(curExercise, exerciseId) in curExercises.props" :key="exerciseId">
+          <exercise :curExercise="curExercise" :eval_methods="curExercises.eval_methods" />
         </div>
       </div>
     </div>
@@ -24,7 +28,6 @@ export default {
   },
   data() {
     return {
-      title: "Exercises",
       loading: false,
       initial: true,
       exSections: [],
@@ -38,11 +41,11 @@ export default {
   },
   methods: {
     getExcercises(section) {
-      this.initial = false;
       this.loading = true;
       this.sectionsEx = [];
       API.exercises(section).then((sectionsEx) => {
         this.loading = false;
+        this.initial = false;
         this.sectionsEx = sectionsEx;
       });
     },
@@ -57,6 +60,7 @@ export default {
   text-transform: uppercase;
   margin: 0;
   padding: 0.25em 1.5em;
+  cursor: pointer;
 }
 
 .exercises-view .sections-bar .section-title:hover {

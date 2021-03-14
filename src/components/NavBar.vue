@@ -1,5 +1,5 @@
 <template>
-  <nav class="nav-bar">
+  <nav>
     <router-link class="routerLink" to="/">{{ title }}</router-link>
     <router-link class="routerLink" to="/Exercises">Exercises</router-link>
     <router-link class="routerLink" to="/Calculator">Calculator</router-link>

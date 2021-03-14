@@ -58,7 +58,6 @@ import API from "@/API";
 export default {
   data() {
     return {
-      title: "Calculator",
       searchProp: "",
       loading: false,
       errorFetching: false,

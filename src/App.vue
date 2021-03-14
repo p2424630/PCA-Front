@@ -1,8 +1,12 @@
 <template>
-  <!-- <div id="app"> -->
-  <nav-bar :title="title" />
-  <router-view />
-  <!-- </div> -->
+  <div id="app">
+    <nav-bar :title="title" />
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
+  </div>
 </template>
 
 <script>
