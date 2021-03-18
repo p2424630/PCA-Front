@@ -1,10 +1,10 @@
 <template>
   <div class="exercises-view">
-    <div class="sections-bar" v-for="(section, v) in exSections.Sections" :key="v">
-      <label class="section-title" @click="getExcercises(section)">{{ section }}</label>
+    <div class="exercisesSections" v-for="(section, v) in exSections.Sections" :key="v">
+      <label class="sectionTitle" @click="getExcercises(section)">{{ section }}</label>
     </div>
     <strong v-if="loading">Loading...</strong>
-    <div v-if="!loading && !initial">
+    <div class="sectionExercises" v-if="!loading && !initial">
       <div
         class="curExercises"
         v-for="(curExercises, sectionId) in sectionsEx.Exercises"
@@ -12,7 +12,11 @@
       >
         {{ sectionId + 1 }}) {{ curExercises.question }}
         <div v-for="(curExercise, exerciseId) in curExercises.props" :key="exerciseId">
-          <exercise :curExercise="curExercise" :eval_methods="curExercises.eval_methods" />
+          <exercise
+            :curExercise="curExercise"
+            :eval_methods="curExercises.eval_methods"
+            :exerciseId="exerciseId"
+          />
         </div>
       </div>
     </div>
@@ -54,7 +58,7 @@ export default {
 </script>
 
 <style>
-.exercises-view .sections-bar .section-title {
+.exercises-view .exercisesSections .sectionTitle {
   background-color: rgba(25, 25, 50, 0.8);
   color: white;
   text-transform: uppercase;
@@ -63,7 +67,7 @@ export default {
   cursor: pointer;
 }
 
-.exercises-view .sections-bar .section-title:hover {
+.exercises-view .exercisesSections .sectionTitle:hover {
   background-color: rgba(50, 50, 75, 0.8);
 }
 

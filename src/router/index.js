@@ -2,12 +2,13 @@ import { createWebHistory, createRouter } from "vue-router";
 import Exercises from "@/views/Exercises.vue";
 import Calculator from "@/views/Calculator.vue";
 import NotFound from "@/views/NotFound.vue";
+import Home from "@/views/Home.vue";
 
 const routes = [
   {
     path: "/",
     name: "home",
-    redirect: "/exercises"
+    component: Home,
   },
   {
     path: "/exercises",
@@ -23,7 +24,6 @@ const routes = [
     path: "/:catchAll(.*)",
     name: "not_found",
     component: NotFound,
-    // redirect: "/",
   },
 ];
 

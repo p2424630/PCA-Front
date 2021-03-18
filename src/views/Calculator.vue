@@ -29,27 +29,30 @@
         </span>
       </div>
     </section>
-    <table v-if="!errorFetching && showTable" class="u-full-width">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th v-for="variable in results.Variables" :key="variable">{{ variable }}</th>
-          <th>{{ results.Proposition }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(interpretation, row) in results.Interpretations" :key="row">
-          <td>{{ row + 1 }}</td>
-          <td
-            v-for="(bool, i) in interpretation"
-            :key="i"
-            :class="{ resDataT: bool === true, resDataF: bool === false }"
-          >
-            {{ bool }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <section v-if="!errorFetching && showTable">
+      <strong v-if="results.Variables.length === 0">Parsed: {{ results.Proposition }}</strong>
+      <table v-else class="u-full-width">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th v-for="variable in results.Variables" :key="variable">{{ variable }}</th>
+            <th>{{ results.Proposition }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="(interpretation, row) in results.Interpretations" :key="row">
+            <td>{{ row + 1 }}</td>
+            <td
+              v-for="(bool, i) in interpretation"
+              :key="i"
+              :class="{ resDataT: bool === true, resDataF: bool === false }"
+            >
+              {{ bool }}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
   </div>
 </template>
 
@@ -89,11 +92,11 @@ export default {
   width: 85%;
 }
 .calculator-view form {
+  display: flex;
+  justify-content: space-between;
   margin: 0;
 }
-.calculator-view .flex {
-  display: flex;
-}
+
 .calculator-view td,
 .calculator-view th {
   font-size: 12px;

@@ -1,9 +1,11 @@
 <template>
   <div class="cur-exercise">
     <form @submit.prevent="checkInput()">
-      {{ curExercise }}
+      {{ toChar(exerciseId) }})
+      <span id="exerciseProp"> {{ curExercise }} </span>
+
       <input v-model="tProp" name="tProp" id="tProp" type="text" placeholder="Enter Proposition" />
-      <button type="submit">check</button>
+      <button type="submit">verify</button>
       <p class="errorFetching" v-if="errorFetching">
         {{ results.response.Error }}
       </p>
@@ -30,6 +32,10 @@ export default {
       type: Array,
       required: true,
     },
+    exerciseId: {
+      type: Number,
+      required: true,
+    },
   },
   data() {
     return {
@@ -52,6 +58,9 @@ export default {
         }
       });
     },
+    toChar(number) {
+      return String.fromCharCode(number + 97);
+    },
   },
 };
 </script>
@@ -67,5 +76,10 @@ export default {
 .cur-exercise input,
 .cur-exercise button {
   margin: 0;
+}
+.cur-exercise #exerciseProp {
+  background-color: lightgray;
+  padding: 0.25em;
+  margin: 0 0.5em;
 }
 </style>
