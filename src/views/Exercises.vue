@@ -5,18 +5,10 @@
     </div>
     <strong v-if="loading">Loading...</strong>
     <div class="sectionExercises" v-if="!loading && !initial">
-      <div
-        class="curExercises"
-        v-for="(curExercises, sectionId) in sectionsEx.Exercises"
-        :key="sectionId"
-      >
+      <div class="curExercises" v-for="(curExercises, sectionId) in sectionsEx.Exercises" :key="sectionId">
         {{ sectionId + 1 }}) {{ curExercises.question }}
         <div v-for="(curExercise, exerciseId) in curExercises.props" :key="exerciseId">
-          <exercise
-            :curExercise="curExercise"
-            :eval_methods="curExercises.eval_methods"
-            :exerciseId="exerciseId"
-          />
+          <exercise :curExercise="curExercise" :eval_methods="curExercises.eval_methods" :exerciseId="exerciseId" />
         </div>
       </div>
     </div>
@@ -69,6 +61,7 @@ export default {
 
 .exercises-view .exercisesSections .sectionTitle:hover {
   background-color: rgba(50, 50, 75, 0.8);
+  transition: 0.2s;
 }
 
 .exercises-view .curExercises {

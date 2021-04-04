@@ -8,7 +8,7 @@
     </router-view>
     <footer>
       <a href="https://github.com/p2424630/PCA-Front">
-        <i class="fab fa-github fa-lg"></i>
+        <i title="GitHub" class="fab fa-github fa-lg"></i>
       </a>
     </footer>
   </div>
@@ -61,11 +61,13 @@ footer {
 }
 footer a {
   text-decoration: none;
-  color: #1eaedb;
+  color: gray;
+}
+footer i {
+  border-radius: 50%;
 }
 footer i:hover {
-  border-radius: 50%;
-  background-color: #1eaedb;
-  color: initial;
+  color: white;
+  transition: 0.2s;
 }
 </style>

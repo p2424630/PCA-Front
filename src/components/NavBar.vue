@@ -31,7 +31,7 @@ nav {
 
 nav .routerLink:hover {
   color: silver;
-  transition: 0.5s;
+  transition: 0.2s;
 }
 
 nav .routerLink {

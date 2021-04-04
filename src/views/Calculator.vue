@@ -17,15 +17,9 @@
     </p>
     <section v-if="!loading && !errorFetching" class="u-full-width">
       <div v-for="(resData, resName) in results" :key="resName">
-        <span
-          v-if="
-            resName !== 'Interpretations' && resName !== 'Variables' && resName !== 'Proposition'
-          "
-        >
+        <span v-if="resName !== 'Interpretations' && resName !== 'Variables' && resName !== 'Proposition'">
           <strong>{{ resName }}: </strong>
-          <span :class="{ resDataT: resData === true, resDataF: resData === false }"
-            >{{ resData }}
-          </span>
+          <span :class="{ resDataT: resData === true, resDataF: resData === false }">{{ resData }} </span>
         </span>
       </div>
     </section>

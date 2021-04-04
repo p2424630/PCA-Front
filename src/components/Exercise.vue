@@ -1,20 +1,19 @@
 <template>
   <div class="cur-exercise">
     <form @submit.prevent="checkInput()">
-      {{ toChar(exerciseId) }})
-      <span id="exerciseProp"> {{ curExercise }} </span>
-
+      <h6 id="propId">{{ toChar(exerciseId) }})</h6>
+      <prop :curExercise="curExercise" />
       <input v-model="tProp" name="tProp" id="tProp" type="text" placeholder="Enter Proposition" />
       <button type="submit">verify</button>
+      <strong v-if="loading"> Loading...</strong>
       <p class="errorFetching" v-if="errorFetching">
         {{ results.response.Error }}
       </p>
-      <strong v-if="loading"> Loading...</strong>
       <p
         v-if="!loading && !errorFetching"
         :class="{ resDataT: results.Result === true, resDataF: results.Result === false }"
       >
-        {{ results.Result_Prop }}
+        {{ results.Result }}
       </p>
     </form>
   </div>
@@ -22,7 +21,11 @@
 
 <script>
 import API from "@/API";
+import Prop from "@/components/Prop.vue";
 export default {
+  components: {
+    Prop,
+  },
   props: {
     curExercise: {
       type: String,
@@ -67,19 +70,18 @@ export default {
 
 <style>
 .cur-exercise form {
+  display: flex;
   margin: 0.5em 0 1em 2em;
 }
 .cur-exercise p {
-  display: inline;
-  padding: 0 1em;
+  padding: 0 1.5em;
 }
 .cur-exercise input,
 .cur-exercise button {
   margin: 0;
 }
-.cur-exercise #exerciseProp {
-  background-color: lightgray;
-  padding: 0.25em;
-  margin: 0 0.5em;
+.cur-exercise h6 {
+  margin-top: 5px;
+  text-align: center;
 }
 </style>

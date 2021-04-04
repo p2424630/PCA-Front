@@ -1,8 +1,7 @@
 const API_URL = "http://localhost:8085/api";
 
 export default {
-  async calcProp(searchProp) {
-    const url = `${API_URL}/calc/${searchProp}`;
+  async apiBuilder(url) {
     const response = await fetch(url, {
       headers: {
         "Content-Type": "application/json",
@@ -13,76 +12,23 @@ export default {
     if (response.ok) {
       return data;
     }
-    const error = new Error(data.message || "Failed to get Prop");
+    const error = new Error(data.message || "Failed to get Response");
     error.response = data;
     return error;
+  },
+  async calcProp(searchProp) {
+    return await this.apiBuilder(`${API_URL}/calc/${searchProp}`);
   },
   async sections() {
-    const url = `${API_URL}/exercises`;
-    const response = await fetch(url, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const data = await response.json();
-    if (response.ok) {
-      return data;
-    }
-    const error = new Error(data.message || "Failed to get Exercise Sections");
-    error.response = data;
-    return error;
+    return await this.apiBuilder(`${API_URL}/exercises`);
   },
   async exercises(section) {
-    const url = `${API_URL}/exercises/${section}`;
-    const response = await fetch(url, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const data = await response.json();
-    if (response.ok) {
-      return data;
-    }
-    const error = new Error(data.message || "Failed to get Exercises for this Section");
-    error.response = data;
-    return error;
+    return await this.apiBuilder(`${API_URL}/exercises/${section}`);
   },
   async calcExercise(q_prop, methods, t_prop) {
-    const url = `${API_URL}/exercises/eval/${q_prop}?methods=${methods}&t_prop=${t_prop}`;
-    const response = await fetch(url, {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-    const data = await response.json();
-    if (response.ok) {
-      return data;
-    }
-    const error = new Error(data.message || "Failed to get Response for exercise");
-    error.response = data;
-    return error;
+    return await this.apiBuilder(`${API_URL}/exercises/eval/${q_prop}?methods=${methods}&t_prop=${t_prop}`);
   },
-  async calcPropSat(searchProp) {
-    const url = `${API_URL}/sat/${searchProp}`;
-    const response = await fetch(url);
-    return response.json();
-  },
-  async calcPropTaut(searchProp) {
-    const url = `${API_URL}/taut/${searchProp}`;
-    const response = await fetch(url);
-    return response.json();
-  },
-  async calcPropContr(searchProp) {
-    const url = `${API_URL}/contr/${searchProp}`;
-    const response = await fetch(url);
-    return response.json();
-  },
-  async calcPropInterp(searchProp) {
-    const url = `${API_URL}/interp/${searchProp}`;
-    const response = await fetch(url);
-    return response.json();
+  async partialAppl(prop, methods) {
+    return await this.apiBuilder(`${API_URL}/partial/${prop}?methods=${methods}`);
   },
 };
