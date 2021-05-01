@@ -7,7 +7,7 @@
       </keep-alive>
     </router-view>
     <footer>
-      <a href="https://github.com/p2424630/PCA-Front">
+      <a id="github" href="https://github.com/p2424630/PCA-Front">
         <i title="GitHub" class="fab fa-github fa-lg"></i>
       </a>
     </footer>
@@ -38,7 +38,7 @@ body {
   flex-direction: column;
 }
 #views {
-  flex: 1;
+  flex-grow: 1;
 }
 .resDataT {
   margin: 0;
@@ -50,23 +50,19 @@ body {
   text-transform: capitalize;
   color: red;
 }
-.errorFetching {
+#errFetching {
+  margin: 0 0.5em;
   color: red;
 }
 footer {
   background-color: rgba(0, 0, 15, 0.8);
-  width: 100%;
-  padding: 0.25em 0;
+  line-height: 30px;
   text-align: center;
 }
 footer a {
-  text-decoration: none;
   color: gray;
 }
-footer i {
-  border-radius: 50%;
-}
-footer i:hover {
+footer a:hover {
   color: white;
   transition: 0.2s;
 }

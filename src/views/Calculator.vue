@@ -1,6 +1,6 @@
 <template>
   <div class="calculator-view">
-    <form class="flex" @submit.prevent="propSubmitted()">
+    <form @submit.prevent="propSubmitted()">
       <input
         v-model="searchProp"
         class="u-full-width"
@@ -12,7 +12,7 @@
       <button type="submit">calculate</button>
     </form>
     <strong v-if="loading">Loading...</strong>
-    <p class="errorFetching" v-if="errorFetching">
+    <p id="errFetching" v-if="errorFetching">
       {{ results.response.Error }}
     </p>
     <section v-if="!loading && !errorFetching" class="u-full-width">
@@ -53,6 +53,12 @@
 <script>
 import API from "@/API";
 export default {
+  // props: {
+  //   prop: {
+  //     type: String,
+  //     required: false,
+  //   },
+  // },
   data() {
     return {
       searchProp: "",
@@ -82,12 +88,12 @@ export default {
 
 <style>
 .calculator-view {
-  margin: 2em auto 2em auto;
+  margin: 2em auto auto auto;
   width: 85%;
 }
 .calculator-view form {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin: 0;
 }
 

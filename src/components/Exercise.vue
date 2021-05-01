@@ -1,31 +1,39 @@
 <template>
   <div class="cur-exercise">
     <form @submit.prevent="checkInput()">
-      <h6 id="propId">{{ toChar(exerciseId) }})</h6>
-      <prop :curExercise="curExercise" />
-      <input v-model="tProp" name="tProp" id="tProp" type="text" placeholder="Enter Proposition" />
+      <span id="exerciseChar">{{ toChar(exerciseId) }})</span>
+      <span id="prop" ref="prop">{{ curExercise }}</span>
+      <input
+        @mouseup="sanitizeInput($event)"
+        v-model="tProp"
+        name="tProp"
+        id="tProp"
+        type="text"
+        placeholder="Enter Proposition"
+      />
       <button type="submit">verify</button>
       <strong v-if="loading"> Loading...</strong>
-      <p class="errorFetching" v-if="errorFetching">
+      <span id="errFetching" v-if="errorFetching">
         {{ results.response.Error }}
-      </p>
-      <p
-        v-if="!loading && !errorFetching"
+      </span>
+      <span
+        id="resultProp"
+        ref="resultProp"
+        v-if="!loading && !errorFetching && !initial"
         :class="{ resDataT: results.Result === true, resDataF: results.Result === false }"
       >
-        {{ results.Result }}
-      </p>
+        {{ results.Result_Prop }}
+      </span>
+      <!-- <router-link :to="{ name: 'calculator', params: { prop: curExercise, methods: eval_methods } }"
+        >Check</router-link
+      > -->
     </form>
   </div>
 </template>
 
 <script>
 import API from "@/API";
-import Prop from "@/components/Prop.vue";
 export default {
-  components: {
-    Prop,
-  },
   props: {
     curExercise: {
       type: String,
@@ -45,11 +53,30 @@ export default {
       tProp: "",
       results: [],
       loading: false,
+      initial: true,
       errorFetching: false,
     };
   },
+  mounted() {
+    window.addEventListener("mouseup", (e) => {
+      if (e.target === this.$refs.prop || e.target === this.$refs.resultProp) this.sanitizeInput();
+    });
+  },
   methods: {
     checkInput() {
+      this.results = [];
+      this.loading = true;
+      this.errorFetching = false;
+      API.calcExercise(this.curExercise, this.eval_methods, this.tProp).then((results) => {
+        this.results = results;
+        this.loading = false;
+        this.initial = false;
+        if (results instanceof Error) {
+          this.errorFetching = true;
+        }
+      });
+    },
+    partialApplication() {
       this.results = [];
       this.loading = true;
       this.errorFetching = false;
@@ -61,6 +88,26 @@ export default {
         }
       });
     },
+    sanitizeInput(e) {
+      if (e) {
+        // Necessary for input values
+        var selection = e.target.value.substring(e.target.selectionStart, e.target.selectionEnd);
+      } else {
+        var selection = window.getSelection().toString();
+      }
+      console.log(selection);
+      // if (this.validProp(selection)) {
+      //   this.menuCreation(selection);
+      // }
+    },
+    validProp(prop) {
+      // var re =
+      // return re.test(prop);
+    },
+    menuCreation(prop) {
+      console.log(prop);
+    },
+
     toChar(number) {
       return String.fromCharCode(number + 97);
     },
@@ -80,8 +127,14 @@ export default {
 .cur-exercise button {
   margin: 0;
 }
-.cur-exercise h6 {
-  margin-top: 5px;
+.cur-exercise #exerciseChar {
+  line-height: 35px;
   text-align: center;
+}
+.cur-exercise #prop,
+.cur-exercise #resultProp {
+  padding: 0.25em;
+  margin: 0.25em 0.5em;
+  background-color: rgb(225, 225, 225);
 }
 </style>
