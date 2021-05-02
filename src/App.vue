@@ -7,7 +7,7 @@
       </keep-alive>
     </router-view>
     <footer>
-      <a id="github" href="https://github.com/p2424630/PCA-Front">
+      <a id="github" href="https://github.com/p2424630/PCA-Front" target="_blank">
         <i title="GitHub" class="fab fa-github fa-lg"></i>
       </a>
     </footer>
@@ -64,6 +64,9 @@ footer a {
 }
 footer a:hover {
   color: white;
-  transition: 0.2s;
+  transition: 0.5s;
+}
+.max-width {
+  width: 100%;
 }
 </style>

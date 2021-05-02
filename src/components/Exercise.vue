@@ -118,10 +118,10 @@ export default {
 <style>
 .cur-exercise form {
   display: flex;
-  margin: 0.5em 0 1em 2em;
+  margin: 0.5rem 0 1rem 2rem;
 }
 .cur-exercise p {
-  padding: 0 1.5em;
+  padding: 0 1.5rem;
 }
 .cur-exercise input,
 .cur-exercise button {
@@ -133,7 +133,7 @@ export default {
 }
 .cur-exercise #prop,
 .cur-exercise #resultProp {
-  padding: 0.25em;
+  padding: 0.25rem;
   margin: 0.25em 0.5em;
   background-color: rgb(225, 225, 225);
 }

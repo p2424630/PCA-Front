@@ -26,18 +26,18 @@ nav :first-child {
 nav {
   display: flex;
   font-size: 1.5em;
-  background-color: rgba(0, 0, 15, 0.8);
-}
-
-nav .routerLink:hover {
-  color: silver;
-  transition: 0.2s;
+  background-color: hsl(240, 100%, 7%);
+  opacity: 0.8;
 }
 
 nav .routerLink {
   text-decoration: none;
   color: white;
-  padding: 0.25em 1em;
-  display: inline-block;
+  padding: 0.25em 0.5em;
+}
+
+nav .routerLink:hover {
+  color: gray;
+  transition: 0.5s;
 }
 </style>

@@ -22,13 +22,16 @@ export default {
   async sections() {
     return await this.apiBuilder(`${API_URL}/exercises`);
   },
+  async laws() {
+    return await this.apiBuilder(`${API_URL}/laws`);
+  },
   async exercises(section) {
     return await this.apiBuilder(`${API_URL}/exercises/${section}`);
   },
   async calcExercise(q_prop, methods, t_prop) {
     return await this.apiBuilder(`${API_URL}/exercises/eval/${q_prop}?methods=${methods}&t_prop=${t_prop}`);
   },
-  async partialAppl(prop, methods) {
+  async partial(prop, methods) {
     return await this.apiBuilder(`${API_URL}/partial/${prop}?methods=${methods}`);
   },
 };
