@@ -19,7 +19,6 @@ const routes = [
     path: "/calculator",
     name: "calculator",
     component: Calculator,
-    // props: (route) => ({ prop: route.prop.p }),
   },
   {
     path: "/:catchAll(.*)",

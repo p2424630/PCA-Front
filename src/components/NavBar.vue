@@ -26,7 +26,7 @@ nav :first-child {
 nav {
   display: flex;
   font-size: 1.5em;
-  background-color: hsl(240, 100%, 7%);
+  background-color: hsl(240, 40%, 15%);
   opacity: 0.8;
 }
 

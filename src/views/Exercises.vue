@@ -1,17 +1,23 @@
 <template>
   <div class="exercises-view">
-    <div class="exercisesSections" v-for="(section, index) in exSections.Sections" :key="index">
-      <label class="sectionTitle" @click="getExcercises(section)">{{ section }}</label>
+    <div id="exercisesSections">
+      <label
+        v-for="(section, index) in exSections.Sections"
+        :key="index"
+        id="sectionTitle"
+        @click="getExcercises(section)"
+        >{{ section }}</label
+      >
     </div>
-    <strong v-if="loading">Loading...</strong>
-    <div class="sectionExercises" v-if="!loading && !initial">
-      <div class="curExercises" v-for="(curExercises, index) in sectionsEx.Exercises" :key="index">
+    <div id="sectionExercises" v-if="!loading && !initial">
+      <div id="curExercises" v-for="(curExercises, index) in sectionsEx.Exercises" :key="index">
         <h3>{{ index + 1 }}) {{ curExercises.question }}</h3>
         <div v-for="(curExercise, exerciseId) in curExercises.props" :key="exerciseId">
           <exercise :curExercise="curExercise" :eval_methods="curExercises.eval_methods" :exerciseId="exerciseId" />
         </div>
       </div>
     </div>
+    <strong v-if="loading">Loading...</strong>
   </div>
 </template>
 
@@ -30,6 +36,7 @@ export default {
       sectionsEx: [],
     };
   },
+
   created() {
     API.sections().then((exSections) => {
       this.exSections = exSections;
@@ -45,31 +52,56 @@ export default {
         this.sectionsEx = sectionsEx;
       });
     },
+    partialApplication() {
+      this.results = [];
+      this.loading = true;
+      this.errorFetching = false;
+      API.calcExercise(this.curExercise, this.eval_methods, this.tProp).then((results) => {
+        this.results = results;
+        this.loading = false;
+        if (results instanceof Error) {
+          this.errorFetching = true;
+        }
+      });
+    },
   },
 };
 </script>
 
 <style>
-.exercises-view .exercisesSections .sectionTitle {
-  background-color: hsl(240, 40%, 10%);
+.exercises-view {
+  display: grid;
+  grid-template-columns: min-content auto;
+  grid-auto-rows: min(10rem, 100%);
+  column-gap: 0.25em;
+}
+.exercises-view #exercisesSections {
+  margin: 0.5em 0.5em 0.5em 1em;
+  opacity: 0.8;
+  display: grid;
+}
+.exercises-view #exercisesSections #sectionTitle {
+  background-color: hsl(240, 20%, 20%);
   color: white;
   text-transform: uppercase;
-  margin: 0;
-  padding: 0.25rem 1rem;
+  padding: 0.5rem;
   cursor: pointer;
-  opacity: 0.8;
 }
-
-.exercises-view .exercisesSections .sectionTitle:hover {
-  background-color: hsl(240, 20%, 20%);
+.exercises-view #exercisesSections #sectionTitle:hover {
+  background-color: hsl(240, 20%, 40%);
   transition: 0.5s;
 }
-
-.exercises-view .curExercises {
-  padding: 1rem 0 2rem 1.5rem;
+.exercises-view #sectionExercises {
+  display: grid;
+  column-gap: 0.25em;
 }
-
-.exercises-view .curExercises h3 {
-  font-size: 2rem;
+.exercises-view #curExercises {
+  padding: 0.5rem;
+  background-color: hsl(240, 20%, 90%);
+  margin: 0.5em;
+}
+.exercises-view #curExercises h3 {
+  font-size: 1rem;
+  margin: 0;
 }
 </style>

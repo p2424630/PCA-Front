@@ -1,60 +1,60 @@
 <template>
   <div class="calculator-view">
-    <section class="inputForm">
-      <h2>Calculate given proposition's satisfiable, tautology, contradiction and draw truth table</h2>
-      <form @submit.prevent="propSubmitted()">
-        <input
-          v-model="searchProp"
-          class="max-width"
-          name="searchProp"
-          id="searchProp"
-          type="text"
-          placeholder="Enter Proposition"
-        />
-        <button type="submit">calculate</button>
-      </form>
+    <section id="inputForms">
+      <div id="inputForm">
+        <h2>Find if a proposition is satisfiable, tautology, contradiction and draw truth table</h2>
+        <form @submit.prevent="propSubmitted()">
+          <input
+            v-model="searchProp"
+            class="max-width"
+            name="searchProp"
+            id="searchProp"
+            type="text"
+            placeholder="Enter Proposition"
+          />
+          <button type="submit">calculate</button>
+        </form>
+      </div>
+      <div id="inputForm">
+        <h2>Apply law to proposition</h2>
+        <form @submit.prevent="propLaw()">
+          <input
+            v-model="inputProp"
+            class="max-width"
+            name="inputProp"
+            id="inputProp"
+            type="text"
+            placeholder="Enter Proposition"
+          />
+          <select v-model="selectedLaw" id="lawList">
+            <option disabled value="">--select--</option>
+            <option v-for="(law, index) in allLaws.Laws" :key="index">{{ law }}</option>
+          </select>
+          <button type="submit">calculate</button>
+        </form>
+      </div>
+      <strong v-if="loading">Loading...</strong>
     </section>
-    <section class="inputForm">
-      <h2>Apply laws to given proposition</h2>
-      <form @submit.prevent="propLaw()">
-        <input
-          v-model="inputProp"
-          class="max-width"
-          name="inputProp"
-          id="inputProp"
-          type="text"
-          placeholder="Enter Proposition"
-        />
-        <select v-model="selectedLaw" id="lawList">
-          <option v-for="(law, index) in allLaws.Laws" :key="index">{{ law }}</option>
-        </select>
-        <button type="submit">calculate</button>
-      </form>
-    </section>
-    <strong v-if="loading">Loading...</strong>
-    <p id="errFetching" v-if="errorFetching">
-      {{ results.response.Error }}
-    </p>
-    <section v-if="!loading && !errorFetching" class="max-width">
-      <div v-for="(resData, resName) in results" :key="resName">
-        <span v-if="resName !== 'Interpretations' && resName !== 'Variables' && resName !== 'Proposition'">
+    <section v-if="!errorFetching && !loading && !initial" id="allResults">
+      <div id="topResults">
+        <div v-for="(resData, resName) in topRes" :key="resName" id="topResult">
           <strong>{{ resName }}: </strong>
           <span :class="{ resDataT: resData === true, resDataF: resData === false }">{{ resData }} </span>
-        </span>
+          <strong v-if="tableRes && tableRes.Variables && tableRes.Variables.length === 0"
+            >Parsed: {{ tableRes.Proposition }}</strong
+          >
+        </div>
       </div>
-    </section>
-    <section v-if="!errorFetching && showTable">
-      <strong v-if="results.Variables.length === 0">Parsed: {{ results.Proposition }}</strong>
-      <table v-else class="max-width">
+      <table v-if="showTable" class="max-width">
         <thead>
           <tr>
             <th>#</th>
-            <th v-for="variable in results.Variables" :key="variable">{{ variable }}</th>
-            <th>{{ results.Proposition }}</th>
+            <th v-for="variable in tableRes.Variables" :key="variable">{{ variable }}</th>
+            <th>{{ tableRes.Proposition }}</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(interpretation, row) in results.Interpretations" :key="row">
+          <tr v-for="(interpretation, row) in tableRes.Interpretations" :key="row">
             <td>{{ row + 1 }}</td>
             <td
               v-for="(bool, i) in interpretation"
@@ -72,6 +72,7 @@
 
 <script>
 import API from "@/API";
+const tableData = ["Interpretations", "Proposition", "Variables"];
 export default {
   data() {
     return {
@@ -81,7 +82,9 @@ export default {
       loading: false,
       errorFetching: false,
       showTable: false,
-      results: [],
+      initial: true,
+      tableRes: [],
+      topRes: [],
       allLaws: [],
     };
   },
@@ -91,31 +94,49 @@ export default {
     });
   },
   methods: {
+    filteredResults(res, keys) {
+      let newObject = {};
+      keys.forEach(function(key) {
+        newObject[key] = res[key];
+      });
+      return newObject;
+    },
     propSubmitted() {
       this.loading = true;
       this.errorFetching = false;
       this.showTable = false;
-      this.results = [];
-      API.calcProp(this.searchProp, "test").then((results) => {
-        this.loading = false;
-        this.results = results;
-        this.showTable = true;
+      API.calcProp(this.searchProp).then((results) => {
         if (results instanceof Error) {
           this.errorFetching = true;
+          let err = results;
+          if (results.response.Error) err = results.response.Error;
+          alert(err);
+        } else {
+          this.tableRes = this.filteredResults(results, tableData);
+          this.topRes = this.filteredResults(
+            results,
+            Object.keys(results).filter((k) => !tableData.includes(k))
+          );
+          this.showTable = true;
         }
+        this.initial = false;
+        this.loading = false;
       });
     },
     propLaw() {
       this.loading = true;
       this.errorFetching = false;
       this.showTable = false;
-      this.results = [];
       API.partial(this.inputProp, this.selectedLaw).then((results) => {
-        this.loading = false;
-        this.results = results;
         if (results instanceof Error) {
           this.errorFetching = true;
+          const err = results.response;
+          if (results.response.Error) this.err = results.response.Error;
+          alert(err);
         }
+        this.initial = false;
+        this.topRes = results;
+        this.loading = false;
       });
     },
   },
@@ -124,7 +145,7 @@ export default {
 
 <style>
 .calculator-view {
-  margin: 2em auto auto auto;
+  margin: 1em auto;
   width: 85vw;
 }
 .calculator-view form {
@@ -133,15 +154,46 @@ export default {
 }
 .calculator-view td,
 .calculator-view th {
-  font-size: 1.2rem;
   text-align: center;
+  border: 1px solid gray;
+  height: 2em;
+}
+.calculator-view table {
+  border-collapse: collapse;
 }
 .calculator-view h2 {
-  font-size: 2rem;
+  font-size: 1.2rem;
   margin: 0 0 0.5em 0;
 }
-.calculator-view .inputForm {
-  padding: 0.5em 0;
-  /* outline-style: outset; */
+.calculator-view #inputForms {
+  margin: 0 auto;
+}
+.calculator-view #inputForms > * {
+  margin-bottom: 2em;
+}
+.calculator-view form input {
+  padding: 0.5rem;
+}
+.calculator-view #topResults {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  font-size: 1.1rem;
+  padding-bottom: 0.25rem;
+}
+.calculator-view #searchProp {
+  margin-right: 0.25em;
+}
+.calculator-view #lawList {
+  margin: 0 0.25em;
+}
+.calculator-view #allResults {
+  background: hsl(240, 20%, 90%);
+  padding: 0.5rem;
+}
+@media screen and (min-width: 1000px) {
+  .calculator-view #inputForms {
+    width: 65vw;
+  }
 }
 </style>

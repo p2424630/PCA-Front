@@ -29,7 +29,9 @@ export default {
 </script>
 
 <style>
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
 body {
+  font-family: "Open Sans", sans-serif;
   margin: 0;
 }
 #app {
@@ -55,9 +57,10 @@ body {
   color: red;
 }
 footer {
-  background-color: rgba(0, 0, 15, 0.8);
+  background-color: hsl(240, 30%, 10%);
   line-height: 30px;
   text-align: center;
+  opacity: 0.8;
 }
 footer a {
   color: gray;
@@ -68,5 +71,8 @@ footer a:hover {
 }
 .max-width {
   width: 100%;
+}
+input {
+  padding: 0 0.5rem;
 }
 </style>
