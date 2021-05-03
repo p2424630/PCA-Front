@@ -1,5 +1,7 @@
 <template>
-  <h2>The page you are looking for does not exist, redirecting in {{ timerCount }}</h2>
+  <div class="not-found-view">
+    <h2>The page you are looking for does not exist, redirecting in {{ timerCount }}</h2>
+  </div>
 </template>
 
 <script>
@@ -26,3 +28,8 @@ export default {
   },
 };
 </script>
+<style>
+.not-found-view h2 {
+  text-align: center;
+}
+</style>

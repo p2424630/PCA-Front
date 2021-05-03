@@ -1,5 +1,6 @@
 <template>
   <div class="calculator-view">
+    <div id="loader" ref="loader"></div>
     <section id="inputForms">
       <div id="inputForm">
         <h2>Find if a proposition is satisfiable, tautology, contradiction and draw truth table</h2>
@@ -33,7 +34,6 @@
           <button type="submit">calculate</button>
         </form>
       </div>
-      <strong v-if="loading">Loading...</strong>
     </section>
     <section v-if="!errorFetching && !loading && !initial" id="allResults">
       <div id="topResults">
@@ -102,6 +102,7 @@ export default {
       return newObject;
     },
     propSubmitted() {
+      this.$refs.loader.classList.add("waiting");
       this.loading = true;
       this.errorFetching = false;
       this.showTable = false;
@@ -121,9 +122,11 @@ export default {
         }
         this.initial = false;
         this.loading = false;
+        this.$refs.loader.classList.remove("waiting");
       });
     },
     propLaw() {
+      this.$refs.loader.classList.add("waiting");
       this.loading = true;
       this.errorFetching = false;
       this.showTable = false;
@@ -137,6 +140,7 @@ export default {
         this.initial = false;
         this.topRes = results;
         this.loading = false;
+        this.$refs.loader.classList.remove("waiting");
       });
     },
   },

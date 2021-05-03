@@ -1,5 +1,6 @@
 <template>
   <div class="exercises-view">
+    <div id="loader" ref="loader"></div>
     <div id="exercisesSections">
       <label
         v-for="(section, index) in exSections.Sections"
@@ -17,7 +18,6 @@
         </div>
       </div>
     </div>
-    <strong v-if="loading">Loading...</strong>
   </div>
 </template>
 
@@ -45,9 +45,11 @@ export default {
   methods: {
     getExcercises(section) {
       this.loading = true;
+      this.$refs.loader.classList.add("waiting");
       this.sectionsEx = [];
       API.exercises(section).then((sectionsEx) => {
         this.loading = false;
+        this.$refs.loader.classList.remove("waiting");
         this.initial = false;
         this.sectionsEx = sectionsEx;
       });
@@ -55,10 +57,12 @@ export default {
     partialApplication() {
       this.results = [];
       this.loading = true;
+      this.$refs.loader.classList.add("waiting");
       this.errorFetching = false;
       API.calcExercise(this.curExercise, this.eval_methods, this.tProp).then((results) => {
         this.results = results;
         this.loading = false;
+        this.$refs.loader.classList.remove("waiting");
         if (results instanceof Error) {
           this.errorFetching = true;
         }

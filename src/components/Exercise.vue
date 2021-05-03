@@ -1,39 +1,29 @@
 <template>
   <div class="cur-exercise">
+    <div id="loader" ref="loader"></div>
     <form @submit.prevent="checkInput()">
       <span id="exerciseChar">{{ toChar(exerciseId) }})</span>
       <span id="prop" ref="prop">{{ curExercise }}</span>
-      <input
-        @mouseup="sanitizeInput($event)"
-        v-model="tProp"
-        name="tProp"
-        id="tProp"
-        type="text"
-        placeholder="Enter Proposition"
-      />
+      <input v-model="tProp" name="tProp" id="tProp" type="text" placeholder="Enter Proposition" />
       <button type="submit">VERIFY</button>
       <span
         id="resultProp"
         ref="resultProp"
-        v-if="!loading && !errorFetching && !initial"
+        v-if="!initial"
         :class="{ resDataT: results.Result === true, resDataF: results.Result === false }"
       >
         {{ results.Result_Prop }}
       </span>
-      <strong v-if="loading">Loading...</strong>
     </form>
-  </div>
-  <div id="highlightable">
     <div
-      class="tools"
-      v-if="showTools"
+      id="menu"
+      v-if="showMenu"
       :style="{
-        left: `${x}px`,
-        top: `${y}px`,
+        left: `${left}px`,
+        top: `${top}px`,
       }"
-      @mousedown.prevent=""
     >
-      <span class="item" v-for="(law, index) in allLaws.Laws" :key="index" @mousedown.prevent="handleAction(law)">{{
+      <span id="lawLink" v-for="(law, index) in allLaws.Laws" :key="index" @mousedown.prevent="handleAction(law)">{{
         displayLaw(law)
       }}</span>
     </div>
@@ -64,12 +54,11 @@ export default {
       loading: false,
       initial: true,
       errorFetching: false,
-      x: 0,
-      y: 0,
-      showTools: false,
+      left: 0,
+      top: 0,
+      showMenu: false,
       selectedText: "",
       allLaws: [],
-      subProp: "",
       selection: "",
     };
   },
@@ -80,14 +69,15 @@ export default {
   },
   mounted() {
     window.addEventListener("mouseup", (e) => {
-      if (e.target === this.$refs.prop || e.target === this.$refs.resultProp) this.sanitizeInput();
-      else this.showTools = false;
+      if (e.target === this.$refs.prop || e.target === this.$refs.resultProp) this.createMenu();
+      else this.showMenu = false;
     });
   },
   methods: {
     checkInput() {
       this.results = [];
       this.loading = true;
+      this.$refs.loader.classList.add("waiting");
       this.errorFetching = false;
       API.calcExercise(this.curExercise, this.eval_methods, this.tProp).then((results) => {
         if (results instanceof Error) {
@@ -96,42 +86,43 @@ export default {
         }
         this.results = results;
         this.loading = false;
+        this.$refs.loader.classList.remove("waiting");
         this.initial = false;
       });
     },
-    sanitizeInput(e) {
+    createMenu(e) {
       this.selection = window.getSelection();
       const startNode = this.selection.getRangeAt(0).startContainer.parentNode;
       const endNode = this.selection.getRangeAt(0).endContainer.parentNode;
       if (!startNode.isSameNode(endNode)) {
-        this.showTools = false;
+        this.showMenu = false;
         return;
       }
-      const { x, y, width } = this.selection.getRangeAt(0).getBoundingClientRect();
+      const { left, top, width } = this.selection.getRangeAt(0).getBoundingClientRect();
       if (!width) {
-        this.showTools = false;
+        this.showMenu = false;
         return;
       }
-      this.x = x + width / 2;
-      this.y = y + window.scrollY - 10;
-      this.showTools = true;
+      this.left = left + width / 2;
+      this.top = top + window.scrollY - 10;
+      this.showMenu = true;
       if (e) this.selectedText = e.target.value.substring(e.target.selectionStart, e.target.selectionEnd);
       else this.selectedText = this.selection.toString();
     },
     handleAction(action) {
       this.loading = true;
+      this.$refs.loader.classList.add("waiting");
       this.errorFetching = false;
       API.partial(this.selectedText, action).then((results) => {
         if (results instanceof Error) {
           this.errorFetching = true;
-          const err = results.response;
-          if (results.response.Error) this.err = results.response.Error;
-          alert(err);
+          alert(results.response.Error);
         } else {
-          this.$refs.prop.textContent = this.$refs.prop.textContent.replace(this.selectedText, results.Result);
+          const parentEl = this.selection.getRangeAt(0).commonAncestorContainer;
+          parentEl.textContent = parentEl.textContent.replace(this.selectedText, results.Result);
         }
-        this.subProp = results.Result;
         this.loading = false;
+        this.$refs.loader.classList.remove("waiting");
       });
     },
     toChar(number) {
@@ -161,50 +152,40 @@ export default {
 }
 .cur-exercise #prop,
 .cur-exercise #resultProp {
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
   margin: 0.25em 0.5em;
   background-color: hsl(240, 20%, 80%);
 }
-.tools {
-  height: 30px;
-  padding: 5px 10px;
-  background: #333;
-  border-radius: 3px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform: translate(-50%, -100%);
-  transition: 0.2s all;
+.cur-exercise #menu {
+  padding: 0.25rem 0.5rem;
+  background: hsl(240, 20%, 20%);
+  border-radius: 5px;
   display: flex;
+  line-height: 30px;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  transform: translate(-50%, -100%);
+  transition: 0.5s all;
 }
-.tools:after {
+.cur-exercise #menu:after {
   content: "";
   position: absolute;
   left: 50%;
-  bottom: -5px;
+  bottom: -0.5rem;
   transform: translateX(-50%);
-  width: 0;
-  height: 0;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid #333;
+  border-left: 0.5rem solid transparent;
+  border-right: 0.5rem solid transparent;
+  border-top: 0.5rem solid hsl(240, 20%, 20%);
 }
-.item {
-  color: #fff;
+.cur-exercise #lawLink {
+  color: white;
   cursor: pointer;
 }
-.item path {
-  fill: #fff;
+.cur-exercise #lawLink:hover {
+  color: hsl(240, 30%, 80%);
 }
-.item:hover path {
-  fill: #1199ff;
-}
-.item:hover {
-  color: #1199ff;
-}
-.item + .item {
-  margin-left: 10px;
+.cur-exercise #lawLink:not(:first-child) {
+  margin-left: 0.5em;
 }
 </style>

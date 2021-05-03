@@ -75,4 +75,29 @@ footer a:hover {
 input {
   padding: 0 0.5rem;
 }
+#loader {
+  width: 1.5em;
+  height: 1.5em;
+  border-radius: 50%;
+  position: fixed;
+  left: calc(50vw - 0.75em);
+  top: calc(50vh - 0.75em);
+  border: 0.5em solid hsl(240, 30%, 40%);
+  border-top: 0.5em solid hsl(240, 30%, 60%);
+  opacity: 0;
+  z-index: 0;
+  animation: spin 1s infinite;
+}
+#loader.waiting {
+  opacity: 1;
+  z-index: 1;
+}
+@keyframes spin {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 </style>
