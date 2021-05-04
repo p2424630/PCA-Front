@@ -11,7 +11,6 @@ export default {
       timerCount: 5,
     };
   },
-
   watch: {
     timerCount: {
       handler(value) {
@@ -20,7 +19,7 @@ export default {
             this.timerCount--;
           }, 1000);
         } else {
-          window.location.href = "/";
+          this.$router.push("/");
         }
       },
       immediate: true,
@@ -28,6 +27,7 @@ export default {
   },
 };
 </script>
+
 <style>
 .not-found-view h2 {
   text-align: center;

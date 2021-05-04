@@ -23,7 +23,7 @@
         top: `${top}px`,
       }"
     >
-      <span id="lawLink" v-for="(law, index) in allLaws.Laws" :key="index" @mousedown.prevent="handleAction(law)">{{
+      <span id="lawLink" v-for="(law, index) in allLaws.Laws" :key="index" @mousedown.prevent="applyLaw(law)">{{
         displayLaw(law)
       }}</span>
     </div>
@@ -75,7 +75,6 @@ export default {
   },
   methods: {
     checkInput() {
-      this.results = [];
       this.loading = true;
       this.$refs.loader.classList.add("waiting");
       this.errorFetching = false;
@@ -83,8 +82,7 @@ export default {
         if (results instanceof Error) {
           this.errorFetching = true;
           alert(results.response.Error);
-        }
-        this.results = results;
+        } else this.results = results;
         this.loading = false;
         this.$refs.loader.classList.remove("waiting");
         this.initial = false;
@@ -109,11 +107,11 @@ export default {
       if (e) this.selectedText = e.target.value.substring(e.target.selectionStart, e.target.selectionEnd);
       else this.selectedText = this.selection.toString();
     },
-    handleAction(action) {
+    applyLaw(law) {
       this.loading = true;
       this.$refs.loader.classList.add("waiting");
       this.errorFetching = false;
-      API.partial(this.selectedText, action).then((results) => {
+      API.partial(this.selectedText, law).then((results) => {
         if (results instanceof Error) {
           this.errorFetching = true;
           alert(results.response.Error);
@@ -167,16 +165,6 @@ export default {
   position: absolute;
   transform: translate(-50%, -100%);
   transition: 0.5s all;
-}
-.cur-exercise #menu:after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -0.5rem;
-  transform: translateX(-50%);
-  border-left: 0.5rem solid transparent;
-  border-right: 0.5rem solid transparent;
-  border-top: 0.5rem solid hsl(240, 20%, 20%);
 }
 .cur-exercise #lawLink {
   color: white;

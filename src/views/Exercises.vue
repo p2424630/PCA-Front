@@ -36,7 +36,6 @@ export default {
       sectionsEx: [],
     };
   },
-
   created() {
     API.sections().then((exSections) => {
       this.exSections = exSections;
@@ -46,7 +45,6 @@ export default {
     getExcercises(section) {
       this.loading = true;
       this.$refs.loader.classList.add("waiting");
-      this.sectionsEx = [];
       API.exercises(section).then((sectionsEx) => {
         this.loading = false;
         this.$refs.loader.classList.remove("waiting");
