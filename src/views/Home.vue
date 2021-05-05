@@ -11,13 +11,17 @@
         <article>
           <h3>Symbols:</h3>
           <div v-for="(symbolsList, type) in symbols" :key="type" id="accSymbols">
-            <p>{{ type }}: {{ symbolsList }}</p>
+            <p>
+              <b>{{ type }}:</b> {{ symbolsList }}
+            </p>
           </div>
         </article>
         <article>
           <h3>Precedence:</h3>
           <div v-for="(prec, index) in precedence" :key="index" id="precLevels">
-            <p>{{ index + 1 }}. {{ prec }}</p>
+            <p>
+              <b>{{ index + 1 }}.</b> {{ prec }}
+            </p>
           </div>
         </article>
       </div>
@@ -33,9 +37,9 @@ export default {
         VARIABLES: "Capital Letter/Word",
         TRUE: ["true", "top", "⊤"],
         FALSE: ["false", "bot", "⊥"],
+        NEGATION: ["not", "¬", "!", "˜"],
         CONJUNCTION: ["and", "∧", "·", "&"],
         DISJUNCTION: ["or", "∨", "+", "∥"],
-        NEGATION: ["not", "¬", "!", "˜"],
         IMPLICATION: ["implies", "⇒", "→"],
         EQUIVALENCE: ["iff", "⇔", "↔"],
       },

@@ -52,20 +52,6 @@ export default {
         this.sectionsEx = sectionsEx;
       });
     },
-    partialApplication() {
-      this.results = [];
-      this.loading = true;
-      this.$refs.loader.classList.add("waiting");
-      this.errorFetching = false;
-      API.calcExercise(this.curExercise, this.eval_methods, this.tProp).then((results) => {
-        this.results = results;
-        this.loading = false;
-        this.$refs.loader.classList.remove("waiting");
-        if (results instanceof Error) {
-          this.errorFetching = true;
-        }
-      });
-    },
   },
 };
 </script>

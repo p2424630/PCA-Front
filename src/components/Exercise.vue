@@ -5,7 +5,7 @@
       <span id="exerciseChar">{{ toChar(exerciseId) }})</span>
       <span id="prop" ref="prop">{{ curExercise }}</span>
       <input v-model="tProp" name="tProp" id="tProp" type="text" placeholder="Enter Proposition" />
-      <button type="submit">VERIFY</button>
+      <button type="submit" :disabled="isDisabled">check</button>
       <span
         id="resultProp"
         ref="resultProp"
@@ -62,6 +62,11 @@ export default {
       selection: "",
     };
   },
+  computed: {
+    isDisabled() {
+      return this.tProp.length === 0;
+    },
+  },
   created() {
     API.laws().then((allLaws) => {
       this.allLaws = allLaws;
@@ -88,7 +93,7 @@ export default {
         this.initial = false;
       });
     },
-    createMenu(e) {
+    createMenu() {
       this.selection = window.getSelection();
       const startNode = this.selection.getRangeAt(0).startContainer.parentNode;
       const endNode = this.selection.getRangeAt(0).endContainer.parentNode;
@@ -101,11 +106,10 @@ export default {
         this.showMenu = false;
         return;
       }
-      this.left = left + width / 2;
       this.top = top + window.scrollY - 10;
+      this.left = left + width / 2;
       this.showMenu = true;
-      if (e) this.selectedText = e.target.value.substring(e.target.selectionStart, e.target.selectionEnd);
-      else this.selectedText = this.selection.toString();
+      this.selectedText = this.selection.toString();
     },
     applyLaw(law) {
       this.loading = true;

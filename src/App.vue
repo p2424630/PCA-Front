@@ -42,6 +42,9 @@ body {
 #views {
   flex-grow: 1;
 }
+button {
+  text-transform: uppercase;
+}
 .resDataT {
   margin: 0;
   text-transform: capitalize;

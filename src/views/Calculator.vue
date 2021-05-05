@@ -13,7 +13,7 @@
             type="text"
             placeholder="Enter Proposition"
           />
-          <button type="submit">calculate</button>
+          <button type="submit" :disabled="isDisabled">calculate</button>
         </form>
       </div>
       <div id="inputForm">
@@ -31,7 +31,7 @@
             <option disabled value="">--select--</option>
             <option v-for="(law, index) in allLaws.Laws" :key="index">{{ law }}</option>
           </select>
-          <button type="submit">calculate</button>
+          <button type="submit" :disabled="isDisabledLaw">calculate</button>
         </form>
       </div>
     </section>
@@ -88,6 +88,14 @@ export default {
       allLaws: [],
     };
   },
+  computed: {
+    isDisabled() {
+      return this.searchProp.length === 0;
+    },
+    isDisabledLaw() {
+      return this.inputProp.length === 0;
+    },
+  },
   created() {
     API.laws().then((allLaws) => {
       this.allLaws = allLaws;
@@ -109,9 +117,7 @@ export default {
       API.calcProp(this.searchProp).then((results) => {
         if (results instanceof Error) {
           this.errorFetching = true;
-          let err = results;
-          if (results.response.Error) err = results.response.Error;
-          alert(err);
+          alert(results.response.Error);
         } else {
           this.tableRes = this.filteredResults(results, tableData);
           this.topRes = this.filteredResults(
@@ -133,9 +139,7 @@ export default {
       API.partial(this.inputProp, this.selectedLaw).then((results) => {
         if (results instanceof Error) {
           this.errorFetching = true;
-          const err = results.response;
-          if (results.response.Error) this.err = results.response.Error;
-          alert(err);
+          alert(results.response.Error);
         }
         this.initial = false;
         this.topRes = results;
