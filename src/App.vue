@@ -45,6 +45,9 @@ body {
 button {
   text-transform: uppercase;
 }
+input {
+  font-size: 1rem;
+}
 .resDataT {
   margin: 0;
   text-transform: capitalize;

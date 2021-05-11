@@ -101,13 +101,13 @@ export default {
         this.showMenu = false;
         return;
       }
-      const { left, top, width } = this.selection.getRangeAt(0).getBoundingClientRect();
+      const { x, y, width } = this.selection.getRangeAt(0).getBoundingClientRect();
       if (!width) {
         this.showMenu = false;
         return;
       }
-      this.top = top + window.scrollY - 10;
-      this.left = left + width / 2;
+      this.top = y + window.scrollY - 10;
+      this.left = x + width / 2;
       this.showMenu = true;
       this.selectedText = this.selection.toString();
     },
@@ -164,8 +164,6 @@ export default {
   border-radius: 5px;
   display: flex;
   line-height: 30px;
-  justify-content: center;
-  align-items: center;
   position: absolute;
   transform: translate(-50%, -100%);
   transition: 0.5s all;
