@@ -22,19 +22,19 @@ When entering the Exercises page, all of the available exercises sections are ge
 
 ![alt text][exercises]
 
-[exercises]: https://github.com/p2424630/PCA-Front/tree/test/images/exercises_example_1.png "pcabuilder image"
+[exercises]: https://github.com/p2424630/PCA-Front/blob/test/images/exercises_example_1.png "pcabuilder image"
 
 Another functionality in the exercises page is the subexpression substitution. When selecting a proposition either from the questions or the answers, a menu will be displayed with Laws.
 
 ![alt text][exercises]
 
-[exercises]: https://github.com/p2424630/PCA-Front/tree/test/images/exercises_example_menu_1.png "pcabuilder image"
+[exercises]: https://github.com/p2424630/PCA-Front/blob/test/images/exercises_example_menu_1.png "pcabuilder image"
 
 Selecting a Law will then replace the selected text with the equivalent proposition.
 
 ![alt text][exercises]
 
-[exercises]: https://github.com/p2424630/PCA-Front/tree/test/images/exercises_example_menu_2.png "pcabuilder image"
+[exercises]: https://github.com/p2424630/PCA-Front/blob/test/images/exercises_example_menu_2.png "pcabuilder image"
 
 An example is shown below, parsing a simple proposition and performing various
 functions.
