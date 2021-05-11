@@ -18,6 +18,8 @@ It consists of 2 main pages, [Exercises](https://github.com/p2424630/PCA-Front/b
 
 ## Usage
 
+### Exercises Page
+
 When entering the Exercises page, all of the available exercises sections are generated from the back-end and displayed on the left. Selecting a section will then display all of the available exercises. Then the user can enter their answer and click the check button, this will make a call to the API with both propositions, generate the results and then compare them, displaying the correct result on the right either green if it's correct or red if false.
 
 ![alt text][exercises_1]
@@ -36,54 +38,24 @@ Selecting a Law will then replace the selected text with the equivalent proposit
 
 [exercises_menu_2]: https://github.com/p2424630/PCA-Front/blob/test/images/exercises_example_menu_2.png "pcabuilder image"
 
-An example is shown below, parsing a simple proposition and performing various
-functions.
+### Calculator Page
 
-```python
-from pca_main import pcabuilder
+The Calculator page has two forms, both have as input propositions, the first one will generate a truth table and display if the proposition is satisfiable, contradiction or a tautology.
 
-prop = pcabuilder.InitProp("A or B and ¬ ¬ C")
-print(f'prop: {str(prop)}')
+![alt text][calculator_1]
 
-for interp in prop.interpretations():
-    print(interp)
-print(f'sat: {prop.satisfiable()}')
-print(f'taut: {prop.tautology()}')
-print(f'prop_inv: {prop.involution()}')
-print(f'prop_com: {prop.commutativity()}')
-```
+[calculator_1]: https://github.com/p2424630/PCA-Front/blob/test/images/calculator_example_1.png "pcabuilder image"
 
-### Parsing Grammar
+The second form have as a second input a dropdown menu with all of the Laws currently implemented in the back-end. The user can enter a proposition and select a specific law to be applied.
 
-| Input       |         Accepted          |
-| ----------- | :-----------------------: |
-| Variable    | Capital Character or Word |
-| True        |     `true` `top` `⊤`      |
-| False       |     `false` `bot` `⊥`     |
-| Negation    |     `not` `¬` `!` `˜`     |
-| Conjunction |     `and` `∧` `·` `&`     |
-| Disjunction |     `or` `∨` `+` `∥`      |
-| Implication |     `implies` `⇒` `→`     |
-| Equivalence |       `iff` `⇔` `↔`       |
+![alt text][calculator_2]
 
-### Precedence
-
-1. ( ) - True - False - Variable
-
-2. Conjunction
-
-3. Disjunction
-
-4. Implication
-
-5. Equivalence
-
-> The exact grammar can be seen in [pcaparser](https://github.com/p2424630/PCA/blob/test/pca_main/pcaparser.py)
+[calculator_2]: https://github.com/p2424630/PCA-Front/blob/test/images/calculator_example_2.png "pcabuilder image"
 
 ---
 
 ## License
 
-> More info can be found [here](https://github.com/p2424630/PCA/blob/test/LICENSE)
+> More info can be found [here](https://github.com/p2424630/PCA-Front/blob/test/LICENSE)
 
 The project is licenced under MIT.
