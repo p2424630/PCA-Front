@@ -61,10 +61,6 @@ export default {
   display: flex;
   justify-content: center;
 }
-.home-view #allArticles h3,
-.home-view #allArticles p {
-  margin: 0;
-}
 .home-view #allArticles p {
   margin-top: 0.5em;
 }

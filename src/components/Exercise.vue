@@ -107,7 +107,7 @@ export default {
         return;
       }
       this.top = y + window.scrollY - 10;
-      this.left = x + width / 2;
+      this.left = Math.max(x + width / 2, 120);
       this.showMenu = true;
       this.selectedText = this.selection.toString();
     },

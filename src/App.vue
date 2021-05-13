@@ -53,6 +53,10 @@ input {
   text-transform: capitalize;
   color: green;
 }
+p,
+h3 {
+  margin: 0;
+}
 .resDataF {
   margin: 0;
   text-transform: capitalize;
