@@ -199,7 +199,7 @@ export default {
   background: hsl(240, 20%, 90%);
   padding: 0.5rem;
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 768px) {
   .calculator-view #inputForms {
     width: 65vw;
   }

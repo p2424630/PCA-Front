@@ -79,9 +79,7 @@ export default {
   background-color: hsl(240, 20%, 40%);
   transition: 0.5s;
 }
-.exercises-view #sectionExercises {
-  width: 100vw;
-}
+
 .exercises-view #curExercises {
   padding: 0.5rem;
   background-color: hsl(240, 20%, 90%);
@@ -97,6 +95,9 @@ export default {
   .exercises-view #exercisesSections {
     display: grid;
     margin: 0 1em 0 0;
+  }
+  .exercises-view #sectionExercises {
+    width: 100vw;
   }
 }
 </style>
