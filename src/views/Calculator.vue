@@ -2,7 +2,7 @@
   <div class="calculator-view">
     <div id="loader" ref="loader"></div>
     <section id="inputForms">
-      <div id="inputForm">
+      <div id="inputFormProp">
         <h2>Find if a proposition is satisfiable, tautology, contradiction and draw truth table</h2>
         <form @submit.prevent="propSubmitted()">
           <input
@@ -16,7 +16,7 @@
           <button type="submit" :disabled="isDisabled">calculate</button>
         </form>
       </div>
-      <div id="inputForm">
+      <div id="inputFormLaw">
         <h2>Apply law to proposition</h2>
         <form @submit.prevent="propLaw()">
           <input
@@ -93,7 +93,7 @@ export default {
       return this.searchProp.length === 0;
     },
     isDisabledLaw() {
-      return this.inputProp.length === 0;
+      return this.inputProp.length === 0 || this.selectedLaw === "";
     },
   },
   created() {
@@ -174,9 +174,12 @@ export default {
   margin: 0 0 0.5em 0;
 }
 .calculator-view #inputForms {
-  margin: 0 auto;
+  background-color: var(--bg);
+  padding: 1rem;
+  margin: auto auto 2em auto;
+  border-radius: 5px;
 }
-.calculator-view #inputForms > * {
+.calculator-view #inputFormProp {
   margin-bottom: 2em;
 }
 .calculator-view form input {
@@ -187,7 +190,7 @@ export default {
   justify-content: space-around;
   flex-wrap: wrap;
   font-size: 1.1rem;
-  padding-bottom: 0.25rem;
+  padding-bottom: 0.5rem;
 }
 .calculator-view #searchProp {
   margin-right: 0.25em;
@@ -196,8 +199,9 @@ export default {
   margin: 0 0.25em;
 }
 .calculator-view #allResults {
-  background: hsl(240, 20%, 90%);
+  background: var(--bg);
   padding: 0.5rem;
+  border-radius: 5px;
 }
 @media screen and (min-width: 768px) {
   .calculator-view #inputForms {

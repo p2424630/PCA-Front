@@ -3,9 +3,10 @@
     <h1>Welcome to Propositional Calculus Application</h1>
     <div id="mainBody">
       <p id="topPar">
-        Highlighting a proposition in the <router-link class="routerLink" to="/Exercises">Exercises</router-link> page
-        will display a popup menu with propositional laws. <br />The law can then be applied to the selected portion of
-        an expression and perform subexpression substitution.
+        Highlighting a proposition in the
+        <router-link title="Go to Exercises" class="routerLink" to="/Exercises">Exercises</router-link> page will
+        display a popup menu with propositional laws. <br />The law can then be applied to the selected portion of an
+        expression and perform subexpression substitution.
       </p>
       <div id="allArticles">
         <article>
@@ -56,17 +57,27 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
+  border-radius: 5px;
 }
 .home-view #allArticles {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 .home-view #allArticles p {
   margin-top: 0.5em;
 }
+.home-view #topPar a {
+  color: var(--primary);
+}
+.home-view #topPar a:hover {
+  color: var(--secondary);
+  transition: 0.2s;
+}
 .home-view #allArticles article {
-  margin: 1em;
+  margin: 1em 1em 0 0;
   padding: 0.5rem 1rem;
-  background-color: hsl(240, 20%, 80%);
+  background-color: var(--bg);
+  border-radius: 5px;
 }
 </style>

@@ -1,8 +1,8 @@
 <template>
   <nav>
-    <router-link class="routerLink" to="/">{{ title }}</router-link>
-    <router-link class="routerLink" to="/Exercises">Exercises</router-link>
-    <router-link class="routerLink" to="/Calculator">Calculator</router-link>
+    <router-link title="Go to Home" class="routerLink" to="/">{{ title }}</router-link>
+    <router-link title="Go to Exercises" class="routerLink" to="/Exercises">Exercises</router-link>
+    <router-link title="Go to Calculator" class="routerLink" to="/Calculator">Calculator</router-link>
   </nav>
 </template>
 
@@ -25,16 +25,14 @@ nav :first-child {
 nav {
   display: flex;
   font-size: 1.5em;
-  background-color: hsl(240, 40%, 15%);
-  opacity: 0.8;
+  background-color: var(--bg);
 }
 nav .routerLink {
   text-decoration: none;
-  color: white;
   padding: 0.25em 0.5em;
 }
 nav .routerLink:hover {
-  color: gray;
-  transition: 0.5s;
+  color: var(--primary);
+  transition: 0.2s;
 }
 </style>

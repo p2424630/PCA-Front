@@ -59,30 +59,28 @@ export default {
 <style>
 .exercises-view {
   margin: 1em;
-  font-size: 80%;
 }
 .exercises-view #exercisesSections {
-  opacity: 0.8;
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 1em;
-  background-color: hsl(240, 20%, 20%);
+  margin-bottom: 2em;
+  background-color: var(--bg);
+  border-radius: 5px;
 }
 .exercises-view #exercisesSections #sectionTitle {
-  color: white;
   text-transform: uppercase;
   padding: 0.5rem;
   cursor: pointer;
-  background-color: inherit;
+  border-radius: 5px;
 }
 .exercises-view #exercisesSections #sectionTitle:hover {
-  background-color: hsl(240, 20%, 40%);
-  transition: 0.5s;
+  color: var(--primary);
+  transition: 0.2s;
 }
-
 .exercises-view #curExercises {
   padding: 0.5rem;
-  background-color: hsl(240, 20%, 90%);
+  background-color: var(--bg);
+  border-radius: 5px;
 }
 .exercises-view #curExercises:not(:first-child) {
   margin-top: 1em;
@@ -90,10 +88,11 @@ export default {
 @media screen and (min-width: 768px) {
   .exercises-view {
     display: flex;
-    font-size: 100%;
   }
   .exercises-view #exercisesSections {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     margin: 0 1em 0 0;
   }
   .exercises-view #sectionExercises {

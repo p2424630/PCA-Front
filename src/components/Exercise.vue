@@ -140,6 +140,7 @@ export default {
 <style>
 .cur-exercise form {
   display: flex;
+  flex-wrap: wrap;
   padding: 0.5rem;
 }
 .cur-exercise p {
@@ -152,15 +153,21 @@ export default {
   line-height: 35px;
   text-align: center;
 }
+.cur-exercise #tProp {
+  padding: 0.5rem;
+}
 .cur-exercise #prop,
 .cur-exercise #resultProp {
   padding: 0.25rem 0.5rem;
-  margin: 0.25em 0.5em;
-  background-color: hsl(240, 20%, 80%);
+  margin: 0 0.5em;
+  background-color: var(--bg-lighter);
+  border-radius: 5px;
+  line-height: 26px;
 }
 .cur-exercise #menu {
   padding: 0.25rem 0.5rem;
-  background: hsl(240, 20%, 20%);
+  background: var(--bg-lighter);
+  border: 1px solid var(--white);
   border-radius: 5px;
   display: flex;
   line-height: 30px;
@@ -169,11 +176,11 @@ export default {
   transition: 0.5s all;
 }
 .cur-exercise #lawLink {
-  color: white;
+  color: var(--white);
   cursor: pointer;
 }
 .cur-exercise #lawLink:hover {
-  color: hsl(240, 30%, 80%);
+  color: var(--secondary);
 }
 .cur-exercise #lawLink:not(:first-child) {
   margin-left: 0.5em;
