@@ -13,7 +13,7 @@
             type="text"
             placeholder="Enter Proposition"
           />
-          <button type="submit" :disabled="isDisabled">calculate</button>
+          <button class="btn-calc" type="submit" :disabled="isDisabled">calculate</button>
         </form>
       </div>
       <div id="inputFormLaw">
@@ -31,7 +31,7 @@
             <option disabled value="">--select--</option>
             <option v-for="(law, index) in allLaws.Laws" :key="index">{{ law }}</option>
           </select>
-          <button type="submit" :disabled="isDisabledLaw">calculate</button>
+          <button class="btn-calc" type="submit" :disabled="isDisabledLaw">calculate</button>
         </form>
       </div>
     </section>
@@ -167,6 +167,7 @@ export default {
   height: 2em;
 }
 .calculator-view table {
+  margin-top: 0.5em;
   border-collapse: collapse;
 }
 .calculator-view h2 {
@@ -190,7 +191,6 @@ export default {
   justify-content: space-around;
   flex-wrap: wrap;
   font-size: 1.1rem;
-  padding-bottom: 0.5rem;
 }
 .calculator-view #searchProp {
   margin-right: 0.25em;

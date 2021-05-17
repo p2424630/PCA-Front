@@ -72,7 +72,7 @@ button {
   border: none;
   border-radius: 5px;
 }
-button::before {
+button.btn-calc::before {
   font-family: fontAwesome;
   content: "\f1ec\00a0";
 }

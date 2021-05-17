@@ -5,7 +5,7 @@
       <span id="exerciseChar">{{ toChar(exerciseId) }})</span>
       <span id="prop" ref="prop">{{ curExercise }}</span>
       <input v-model="tProp" name="tProp" id="tProp" type="text" placeholder="Enter Proposition" />
-      <button type="submit" :disabled="isDisabled">check</button>
+      <button class="btn-calc" type="submit" :disabled="isDisabled">check</button>
       <span
         id="resultProp"
         ref="resultProp"
