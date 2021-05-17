@@ -57,7 +57,6 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border-radius: 5px;
 }
 .home-view #allArticles {
   display: flex;

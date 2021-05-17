@@ -72,6 +72,10 @@ button {
   border: none;
   border-radius: 5px;
 }
+button::before {
+  font-family: fontAwesome;
+  content: "\f1ec\00a0";
+}
 button:enabled:hover {
   cursor: pointer;
   animation: fadeOut 0.2s forwards;
@@ -153,7 +157,7 @@ input {
     opacity: 0.75;
   }
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1000px) {
   body {
     font-size: 100%;
   }

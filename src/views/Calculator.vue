@@ -203,7 +203,7 @@ export default {
   padding: 0.5rem;
   border-radius: 5px;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1000px) {
   .calculator-view #inputForms {
     width: 65vw;
   }
