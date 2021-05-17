@@ -84,7 +84,7 @@ export default {
 .exercises-view #curExercises:not(:first-child) {
   margin-top: 1em;
 }
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 1050px) {
   .exercises-view {
     display: flex;
   }

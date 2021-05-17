@@ -85,7 +85,6 @@ button:focus {
 }
 input,
 select {
-  font-size: 1rem;
   background-color: var(--bg-lighter);
   border: none;
   border-radius: 5px;
@@ -157,7 +156,7 @@ input {
     opacity: 0.75;
   }
 }
-@media screen and (min-width: 1000px) {
+@media screen and (min-width: 1050px) {
   body {
     font-size: 100%;
   }
