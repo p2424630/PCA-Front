@@ -68,7 +68,6 @@ export default {
   border-radius: 5px;
 }
 .exercises-view #exercisesSections #sectionTitle {
-  text-transform: uppercase;
   padding: 0.5rem;
   cursor: pointer;
   border-radius: 5px;

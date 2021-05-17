@@ -1,5 +1,5 @@
 <template>
-  <div class="not-found-view">
+  <div class="not-found">
     <h2>The page you are looking for does not exist, redirecting in {{ timerCount }}</h2>
   </div>
 </template>
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style>
-.not-found-view h2 {
+.not-found h2 {
   text-align: center;
 }
 </style>
