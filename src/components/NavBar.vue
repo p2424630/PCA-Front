@@ -18,14 +18,15 @@ export default {
 </script>
 
 <style>
-nav :first-child {
-  margin-right: auto;
-  font-weight: bold;
-}
 nav {
   display: flex;
   font-size: 1.5em;
   background-color: var(--bg);
+  box-shadow: var(--shadow2dp);
+}
+nav :first-child {
+  margin-right: auto;
+  font-weight: bold;
 }
 nav .routerLink {
   text-decoration: none;

@@ -10,6 +10,7 @@
       <a id="github" title="Go to GitHub" href="https://github.com/p2424630/PCA-Front" target="_blank">
         <i class="fab fa-github fa-lg"></i>
       </a>
+      <label id="themeSwitch" class="fas fa-sun fa-lg"></label>
     </footer>
   </div>
 </template>
@@ -25,6 +26,19 @@ export default {
       title: "PCA",
     };
   },
+  mounted() {
+    themeSwitch.addEventListener("click", (e) => {
+      if (document.documentElement.hasAttribute("data-theme")) {
+        document.documentElement.removeAttribute("data-theme");
+        themeSwitch.classList.add("fa-sun");
+        themeSwitch.classList.remove("fa-moon");
+      } else {
+        document.documentElement.setAttribute("data-theme", "light");
+        themeSwitch.classList.remove("fa-sun");
+        themeSwitch.classList.add("fa-moon");
+      }
+    });
+  },
 };
 </script>
 
@@ -33,15 +47,24 @@ export default {
 :root {
   --bg-darker: #1f2933;
   --bg: #323f4b;
-  --bg-lighter: #3e4c59;
   --primary: #6bf8e5;
-  --secondary: #6ad8fa;
-  --white: #ffffff;
+  --white: #f0f0f0;
+  --black: #121212;
   --true: #abfa60;
   --false: #ff6b86;
   --loader-out: #16695e;
   --loader-in: #81e6d9;
   --text-color: var(--white);
+  --shadow1dp: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
+  --shadow2dp: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+[data-theme="light"] {
+  --bg-darker: var(--white);
+  --bg: #e4e4e4;
+  --primary: #00a4d6;
+  --true: #55b100;
+  --false: #c70024;
+  --text-color: var(--black);
 }
 body {
   font-family: "Open Sans", sans-serif;
@@ -67,8 +90,8 @@ a {
   flex-grow: 1;
 }
 button {
+  box-shadow: var(--shadow1dp);
   text-transform: uppercase;
-  background-color: var(--primary);
   border: none;
   border-radius: 5px;
 }
@@ -78,17 +101,18 @@ button.btn-calc::before {
 }
 button:enabled:hover {
   cursor: pointer;
-  animation: fadeOut 0.2s forwards;
+  background-color: var(--primary);
+  transition: 0.2s;
 }
 button:focus {
   outline: none;
 }
 input,
 select {
-  background-color: var(--bg-lighter);
-  border: none;
+  background-color: var(--menu-bg);
+  box-shadow: var(--shadow1dp);
   border-radius: 5px;
-  color: var(--white);
+  color: var(--text-color);
   border: 1px solid transparent;
 }
 select,
@@ -98,27 +122,46 @@ button {
 input:focus,
 select:focus {
   outline: none;
-  border-color: var(--secondary);
+  border-color: var(--primary);
 }
 .resDataT {
   margin: 0;
   text-transform: capitalize;
   color: var(--true);
+  font-weight: bold;
 }
 .resDataF {
   margin: 0;
   text-transform: capitalize;
   color: var(--false);
+  font-weight: bold;
 }
 footer {
+  box-shadow: var(--shadow2dp);
+  display: flex;
+  white-space: nowrap;
   background-color: var(--bg);
   line-height: 30px;
-  text-align: center;
-  opacity: 0.8;
 }
-footer a:hover {
+footer #themeSwitch,
+footer #github {
+  line-height: 30px;
+}
+footer a:hover,
+footer #themeSwitch:hover {
   color: var(--primary);
   transition: 0.2s;
+}
+footer #github {
+  position: absolute;
+  left: calc(50vw - 1em);
+}
+footer #themeSwitch {
+  margin-left: auto;
+  margin-right: 1em;
+}
+footer #themeSwitch:hover {
+  cursor: pointer;
 }
 .max-width {
   width: 100%;
@@ -149,11 +192,6 @@ input {
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-@keyframes fadeOut {
-  100% {
-    opacity: 0.75;
   }
 }
 @media screen and (min-width: 1050px) {

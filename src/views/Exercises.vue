@@ -65,6 +65,7 @@ export default {
   flex-wrap: wrap;
   margin-bottom: 2em;
   background-color: var(--bg);
+  box-shadow: var(--shadow2dp);
   border-radius: 5px;
 }
 .exercises-view #exercisesSections #sectionTitle {
@@ -79,6 +80,7 @@ export default {
 .exercises-view #curExercises {
   padding: 0.5rem;
   background-color: var(--bg);
+  box-shadow: var(--shadow2dp);
   border-radius: 5px;
 }
 .exercises-view #curExercises:not(:first-child) {

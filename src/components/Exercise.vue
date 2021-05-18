@@ -4,7 +4,7 @@
     <form @submit.prevent="checkInput()">
       <span id="exerciseChar">{{ toChar(exerciseId) }})</span>
       <span id="prop" ref="prop">{{ curExercise }}</span>
-      <input v-model="tProp" name="tProp" id="tProp" type="text" placeholder="Enter Proposition" />
+      <input v-model="tProp" name="tProp" class="tProp" type="text" placeholder="Enter Proposition" />
       <button class="btn-calc" type="submit" :disabled="isDisabled">check</button>
       <span
         id="resultProp"
@@ -147,27 +147,27 @@ export default {
   padding: 0 1.5rem;
 }
 .cur-exercise input {
-  margin-right: 0.25em;
+  margin-right: 0.5em;
 }
 .cur-exercise #exerciseChar {
   line-height: 35px;
   text-align: center;
 }
-.cur-exercise #tProp {
+.cur-exercise .tProp {
   padding: 0.5rem;
 }
 .cur-exercise #prop,
 .cur-exercise #resultProp {
   padding: 0.25rem 0.5rem;
   margin: 0 0.5em;
-  background-color: var(--bg-lighter);
+  box-shadow: var(--shadow1dp);
   border-radius: 5px;
   line-height: 26px;
 }
 .cur-exercise #menu {
   padding: 0.25rem 0.5rem;
-  background: var(--bg-lighter);
-  border: 1px solid var(--white);
+  background: var(--bg-darker);
+  border: 2px solid var(--text-color);
   border-radius: 5px;
   display: flex;
   line-height: 30px;
@@ -176,11 +176,12 @@ export default {
   transition: 0.5s all;
 }
 .cur-exercise #lawLink {
-  color: var(--white);
+  color: var(--text-color);
   cursor: pointer;
 }
 .cur-exercise #lawLink:hover {
-  color: var(--secondary);
+  color: var(--primary);
+  transition: 0.2s;
 }
 .cur-exercise #lawLink:not(:first-child) {
   margin-left: 0.5em;

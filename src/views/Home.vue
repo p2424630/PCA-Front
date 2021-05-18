@@ -69,14 +69,11 @@ export default {
 .home-view #topPar a {
   color: var(--primary);
 }
-.home-view #topPar a:hover {
-  color: var(--secondary);
-  transition: 0.2s;
-}
 .home-view #allArticles article {
   margin: 1em 1em 0 0;
   padding: 0.5rem 1rem;
   background-color: var(--bg);
   border-radius: 5px;
+  box-shadow: var(--shadow2dp);
 }
 </style>
