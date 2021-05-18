@@ -52,6 +52,14 @@ The second form have as a second input a dropdown menu with all of the Laws curr
 
 [calculator_2]: https://github.com/p2424630/PCA-Front/blob/main/images/calculator_example_2.png "pcabuilder image"
 
+### Theme
+
+The website offers light theme easily activated from the button down-right.
+
+![alt text][exercises_light_1]
+
+[exercises_light_1]: https://github.com/p2424630/PCA-Front/blob/main/images/exercises_light_1.png "theme image"
+
 ---
 
 ## License

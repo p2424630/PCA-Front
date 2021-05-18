@@ -10,7 +10,7 @@
       <a id="github" title="Go to GitHub" href="https://github.com/p2424630/PCA-Front" target="_blank">
         <i class="fab fa-github fa-lg"></i>
       </a>
-      <label id="themeSwitch" class="fas fa-sun fa-lg"></label>
+      <label id="themeSwitch" class="fas fa-sun fa-lg" ref="themeSwitch"></label>
     </footer>
   </div>
 </template>
@@ -27,15 +27,13 @@ export default {
     };
   },
   mounted() {
-    themeSwitch.addEventListener("click", (e) => {
-      if (document.documentElement.hasAttribute("data-theme")) {
-        document.documentElement.removeAttribute("data-theme");
-        themeSwitch.classList.add("fa-sun");
-        themeSwitch.classList.remove("fa-moon");
+    themeSwitch.addEventListener("click", () => {
+      if (document.documentElement.classList.contains("light")) {
+        document.documentElement.classList.remove("light");
+        this.$refs.themeSwitch.classList.replace("fa-moon", "fa-sun");
       } else {
-        document.documentElement.setAttribute("data-theme", "light");
-        themeSwitch.classList.remove("fa-sun");
-        themeSwitch.classList.add("fa-moon");
+        document.documentElement.classList.add("light");
+        this.$refs.themeSwitch.classList.replace("fa-sun", "fa-moon");
       }
     });
   },
@@ -58,7 +56,7 @@ export default {
   --shadow1dp: 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 2px 1px -1px rgba(0, 0, 0, 0.12), 0 1px 3px 0 rgba(0, 0, 0, 0.2);
   --shadow2dp: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.12), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
 }
-[data-theme="light"] {
+.light {
   --bg-darker: var(--white);
   --bg: #e4e4e4;
   --primary: #00a4d6;
@@ -109,7 +107,7 @@ button:focus {
 }
 input,
 select {
-  background-color: var(--menu-bg);
+  background-color: var(--bg);
   box-shadow: var(--shadow1dp);
   border-radius: 5px;
   color: var(--text-color);

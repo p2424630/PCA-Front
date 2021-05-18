@@ -199,6 +199,7 @@ export default {
   margin: 0 0.25em;
 }
 .calculator-view #allResults {
+  background-color: var(--bg);
   box-shadow: var(--shadow2dp);
   padding: 0.5rem;
   border-radius: 5px;
