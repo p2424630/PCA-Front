@@ -31,7 +31,6 @@ export default {
   },
   async calcExercise(q_prop, methods, t_prop) {
     t_prop = this.encodeInput(t_prop);
-    console.log(t_prop);
     return await this.apiBuilder(`${API_URL}/exercises/eval/${q_prop}?methods=${methods}&t_prop=${t_prop}`);
   },
   async partial(prop, methods) {
