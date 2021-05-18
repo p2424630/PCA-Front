@@ -40,7 +40,7 @@ export default {
         FALSE: ["false", "bot", "⊥"],
         NEGATION: ["not", "¬", "!", "˜"],
         CONJUNCTION: ["and", "∧", "·"],
-        DISJUNCTION: ["or", "∨", "+", "∥"],
+        DISJUNCTION: ["or", "∨", "∥"],
         IMPLICATION: ["implies", "⇒", "→"],
         EQUIVALENCE: ["iff", "⇔", "↔"],
       },
