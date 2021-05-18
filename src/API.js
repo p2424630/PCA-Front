@@ -17,6 +17,7 @@ export default {
     return error;
   },
   async calcProp(searchProp) {
+    searchProp = this.encodeInput(searchProp);
     return await this.apiBuilder(`${API_URL}/calc/${searchProp}`);
   },
   async sections() {
@@ -29,9 +30,15 @@ export default {
     return await this.apiBuilder(`${API_URL}/exercises/${section}`);
   },
   async calcExercise(q_prop, methods, t_prop) {
+    t_prop = this.encodeInput(t_prop);
+    console.log(t_prop);
     return await this.apiBuilder(`${API_URL}/exercises/eval/${q_prop}?methods=${methods}&t_prop=${t_prop}`);
   },
   async partial(prop, methods) {
+    prop = this.encodeInput(prop);
     return await this.apiBuilder(`${API_URL}/partial/${prop}?methods=${methods}`);
+  },
+  encodeInput(str) {
+    return encodeURIComponent(str);
   },
 };
