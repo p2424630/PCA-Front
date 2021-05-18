@@ -39,7 +39,7 @@ export default {
         TRUE: ["true", "top", "⊤"],
         FALSE: ["false", "bot", "⊥"],
         NEGATION: ["not", "¬", "!", "˜"],
-        CONJUNCTION: ["and", "∧", "·", "&"],
+        CONJUNCTION: ["and", "∧", "·"],
         DISJUNCTION: ["or", "∨", "+", "∥"],
         IMPLICATION: ["implies", "⇒", "→"],
         EQUIVALENCE: ["iff", "⇔", "↔"],
