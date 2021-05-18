@@ -167,7 +167,7 @@ export default {
 }
 .cur-exercise #menu {
   padding: 0.25rem 0.5rem;
-  background: var(--bg-darker);
+  background: var(--bg);
   border: 2px solid var(--text-color);
   border-radius: 5px;
   display: flex;

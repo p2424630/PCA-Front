@@ -175,6 +175,7 @@ export default {
   margin: 0 0 0.5em 0;
 }
 .calculator-view #inputForms {
+  background-color: var(--bg);
   box-shadow: var(--shadow2dp);
   padding: 1rem;
   margin: auto auto 2em auto;

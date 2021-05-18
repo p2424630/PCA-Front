@@ -107,7 +107,7 @@ button:focus {
 }
 input,
 select {
-  background-color: var(--bg);
+  background-color: var(--bg-darker);
   box-shadow: var(--shadow1dp);
   border-radius: 5px;
   color: var(--text-color);
