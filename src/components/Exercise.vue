@@ -9,7 +9,7 @@
       <span
         id="resultProp"
         ref="resultProp"
-        v-if="!initial"
+        v-if="!initial && !errorFetching"
         :class="{ resDataT: results.Result === true, resDataF: results.Result === false }"
       >
         {{ results.Result_Prop }}
@@ -158,6 +158,7 @@ export default {
 }
 .cur-exercise #prop,
 .cur-exercise #resultProp {
+  background-color: var(--bg-darker);
   padding: 0.25rem 0.5rem;
   margin: 0 0.5em;
   box-shadow: var(--shadow1dp);
