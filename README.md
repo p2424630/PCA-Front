@@ -1,7 +1,7 @@
 # Propositional-Calculus-Application Front-End
 
 This is a Website build to be used as an assisting tool for Propositional Calculus learning.
-It consists of 2 main pages, [Exercises](https://github.com/p2424630/PCA-Front/blob/main/src/views/Exercises.vue) and [Calculator](https://github.com/p2424630/PCA-Front/blob/main/src/views/Calculator.vue), as well as the [Home](https://github.com/p2424630/PCA-Front/blob/main/src/views/Home.vue) page.
+It consists of 2 main pages, [Exercises](src/views/Exercises.vue) and [Calculator](src/views/Calculator.vue), as well as the [Home](src/views/Home.vue) page.
 
 > Requires running the [Back-End](https://github.com/p2424630/PCA) API server on `port: 8085`.
 
