@@ -40,12 +40,9 @@
         <div v-for="(resData, resName) in topRes" :key="resName" id="topResult">
           <strong>{{ resName }}: </strong>
           <span :class="{ resDataT: resData === true, resDataF: resData === false }">{{ resData }} </span>
-          <strong v-if="tableRes && tableRes.Variables && tableRes.Variables.length === 0"
-            >Parsed: {{ tableRes.Proposition }}</strong
-          >
         </div>
       </div>
-      <table v-if="showTable" class="max-width">
+      <table v-if="showTable && tableRes.Interpretations.length > 0" class="max-width">
         <thead>
           <tr>
             <th>#</th>
