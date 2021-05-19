@@ -24,19 +24,19 @@ When entering the Exercises page, all of the available exercises sections are ge
 
 ![alt text][exercises_1]
 
-[exercises_1]: https://github.com/p2424630/PCA-Front/blob/main/images/exercises_example_1.png "pcabuilder image"
+[exercises_1]: images/exercises_example_1.png "pcabuilder image"
 
 Another functionality in the exercises page is the subexpression substitution. When selecting a proposition either from the questions or the answers, a menu will be displayed with Laws.
 
 ![alt text][exercises_menu_1]
 
-[exercises_menu_1]: https://github.com/p2424630/PCA-Front/blob/main/images/exercises_example_menu_1.png "pcabuilder image"
+[exercises_menu_1]: images/exercises_example_menu_1.png "pcabuilder image"
 
 Selecting a Law will then replace the selected text with the equivalent proposition.
 
 ![alt text][exercises_menu_2]
 
-[exercises_menu_2]: https://github.com/p2424630/PCA-Front/blob/main/images/exercises_example_menu_2.png "pcabuilder image"
+[exercises_menu_2]: images/exercises_example_menu_2.png "pcabuilder image"
 
 ### Calculator Page
 
@@ -44,13 +44,13 @@ The Calculator page has two forms, both have as input propositions, the first on
 
 ![alt text][calculator_1]
 
-[calculator_1]: https://github.com/p2424630/PCA-Front/blob/main/images/calculator_example_1.png "pcabuilder image"
+[calculator_1]: images/calculator_example_1.png "pcabuilder image"
 
 The second form have as a second input a dropdown menu with all of the Laws currently implemented in the back-end. The user can enter a proposition and select a specific law to be applied.
 
 ![alt text][calculator_2]
 
-[calculator_2]: https://github.com/p2424630/PCA-Front/blob/main/images/calculator_example_2.png "pcabuilder image"
+[calculator_2]: images/calculator_example_2.png "pcabuilder image"
 
 ### Theme
 
@@ -58,12 +58,12 @@ The website offers light theme easily activated from the button down-right.
 
 ![alt text][exercises_light_1]
 
-[exercises_light_1]: https://github.com/p2424630/PCA-Front/blob/main/images/exercises_light_1.png "theme image"
+[exercises_light_1]: images/exercises_light_1.png "theme image"
 
 ---
 
 ## License
 
-> More info can be found [here](https://github.com/p2424630/PCA-Front/blob/main/LICENSE)
+> More info can be found [here](LICENSE)
 
 The project is licenced under MIT.
