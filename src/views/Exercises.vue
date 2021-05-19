@@ -14,7 +14,12 @@
       <div id="curExercises" v-for="(curExercises, index) in sectionsEx.Exercises" :key="index">
         <h3>{{ index + 1 }}) {{ curExercises.question }}</h3>
         <div v-for="(curExercise, exerciseId) in curExercises.props" :key="exerciseId">
-          <exercise :curExercise="curExercise" :eval_methods="curExercises.eval_methods" :exerciseId="exerciseId" />
+          <exercise
+            :curExercise="curExercise"
+            :allLaws="allLaws.Laws"
+            :evalMethods="curExercises.eval_methods"
+            :exerciseId="exerciseId"
+          />
         </div>
       </div>
     </div>
@@ -34,11 +39,15 @@ export default {
       initial: true,
       exSections: [],
       sectionsEx: [],
+      allLaws: [],
     };
   },
   created() {
     API.sections().then((exSections) => {
       this.exSections = exSections;
+    });
+    API.laws().then((allLaws) => {
+      this.allLaws = allLaws;
     });
   },
   methods: {

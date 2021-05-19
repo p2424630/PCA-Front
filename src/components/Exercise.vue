@@ -23,7 +23,7 @@
         top: `${top}px`,
       }"
     >
-      <span id="lawLink" v-for="(law, index) in allLaws.Laws" :key="index" @mousedown.prevent="applyLaw(law)">{{
+      <span id="lawLink" v-for="(law, index) in allLaws" :key="index" @mousedown.prevent="applyLaw(law)">{{
         displayLaw(law)
       }}</span>
     </div>
@@ -38,7 +38,11 @@ export default {
       type: String,
       required: true,
     },
-    eval_methods: {
+    evalMethods: {
+      type: Array,
+      required: true,
+    },
+    allLaws: {
       type: Array,
       required: true,
     },
@@ -58,7 +62,6 @@ export default {
       top: 0,
       showMenu: false,
       selectedText: "",
-      allLaws: [],
       selection: "",
     };
   },
@@ -66,11 +69,6 @@ export default {
     isDisabled() {
       return this.tProp.length === 0;
     },
-  },
-  created() {
-    API.laws().then((allLaws) => {
-      this.allLaws = allLaws;
-    });
   },
   mounted() {
     window.addEventListener("mouseup", (e) => {
@@ -83,7 +81,7 @@ export default {
       this.loading = true;
       this.$refs.loader.classList.add("waiting");
       this.errorFetching = false;
-      API.calcExercise(this.curExercise, this.eval_methods, this.tProp).then((results) => {
+      API.calcExercise(this.curExercise, this.evalMethods, this.tProp).then((results) => {
         if (results instanceof Error) {
           this.errorFetching = true;
           alert(results.response.Error);
